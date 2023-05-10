@@ -1,0 +1,15 @@
+java代码运行 三步 1.编写2编译3运行
+java在操作系统中不能直接运行 操作系统不认识
+把java代码翻译城操作系统看懂的东西————编译 --javac
+java 运行 .class 字节码文件
+代码
+java 程序基本结构
+public class HelloWorld{
+       public static void main(String[] args)
+}
+打印HelloWorld
+public class HelloWorld{
+       public static void main(String[] args){
+       System.out.println("HelloWorld");
+       }
+}
