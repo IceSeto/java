@@ -25,4 +25,38 @@ class 定义一个类 后面＋类名
 true fulse 
  真     假
 空类型 
-null
+null 表示什么也没有
+//代码
+public class valuedemo {
+    public static void main(String[] args) {
+        //掌握常见数据在代码中如何书写
+        //整数
+        System.out.println(666);
+        System.out.println(777);
+        //小数
+        System.out.println(1.63);
+        System.out.println(-7.84);
+        //字符串
+        System.out.println("asdasd");
+        System.out.println("洛阳理工学院");
+        //字符
+        System.out.println('男');
+        System.out.println('a');
+        //布尔
+        System.out.println(true);
+        System.out.println(false);
+        //空
+        //细节；null不能直接打印
+        //只能以字符串的形式打印
+        System.out.println("null");
+    }
+}
+特殊字符类型
+\t 制表符
+在打印时，把前面字符串补齐到8或者8的倍数 至少补一个空格 最多补八个空格
+public class valuedemo {
+    public static void main(String[] args) {
+        System.out.println("name"+'\t'+"age");
+        System.out.println("tom"+'\t'+"23");
+    }
+}
