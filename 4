@@ -1,0 +1,61 @@
+//进制
+public class jinzhi {
+    public static void main(String[] args) {
+        //不同进制数在java中的表现形式
+        //二进制 以0b开头
+        //十进制不加前缀
+        //八进制 以0开头
+        //十六进制 以0x开头
+        System.out.println(123);//十进制
+        System.out.println(0123);//八进制
+        System.out.println(0b123);//语法错误
+        System.out.println(0x123);//十六进制
+    }
+}
+二进制 101 = 十进制 1 * 0 + 0 * 2 + 0 * 2 ^ 2 = 5;
+八进制 101 = 十进制 1 * 0 + 0 * 8 + 1 * 8 ^ 2 = 65;
+十六进制abc = 十进制12 * 0 + 11 * 16 + 10 * 16 ^ 2 = 2748;
+十进制转其他 除基取余法
+计算机中所有数据都以二进制的形式存储
+//数据类型
+byte      1字节 -128————127
+short     2字节
+int       4字节
+long      8字节
+float     4字节
+double    8字节
+char      2字节
+boolean   1字节
+//代码
+public class variabledemo3 {
+    public static void main(String[] args) {
+        //byte
+        byte a = 10;
+        //short
+        short b = 20;
+        //int
+        int c = 30;
+        //long
+        //如果要定义long类型的变量
+        //需要在数据值后面加个L
+        long n = 9999999999L;
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(n);
+        //float
+        //在数值后加f
+        float q = 10.23f;
+        //double
+        double p = 233.53;
+        //char
+        char i = '中';
+        //boolean
+        //true false
+        boolean o = true;
+        System.out.println(p);
+        System.out.println(q);
+        System.out.println(i);
+        System.out.println(o);
+    }
+}
