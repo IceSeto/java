@@ -1,0 +1,84 @@
+注意事项 
+//一个变量只能存一个值
+//变量名不允许重复
+//一条语句能定义多个变量
+//变量在使用之前一定要赋值
+//变量的作用范围
+变量
+某个经常改变的 可以用变量存储
+数据类型 变量名 = 数据值；
+整数 int  浮点数 float 
+//代码
+//打印
+public class variabledemo {
+    //主入口
+    public static void main(String[] args) {
+        //定义变量
+        // 数据类型 变量名 = 数据值；
+        //数据类型；限定了变量能储存数据的类型
+        //int 整数  float 浮点数 小数
+        //变量名就是存储空间的名字
+        //作用 方便使用
+        //数据值；真正存在变量中的数据
+        //等号 赋值
+        int a = 10;
+        System.out.println(a);//10
+    }
+}
+//参与计算
+public class variabledemo2 {
+    public static void main(String[] args) {
+        //参与计算
+        int b = 10;
+        int c = 20;
+        System.out.println(c + b);
+    }
+}
+//修改变量记录的值
+public class variabledemo3 {
+    public static void main(String[] args) {
+        int a = 10;
+          a = 20;
+        System.out.println(a);
+    }
+}
+//一条语句定义多个变量
+public class variabledemo4 {
+    public static void main(String[] args) {
+        //一条语句中定义多个变量
+        int a = 10, b = 20, c= 30;
+        System.out.println(a);
+        System.out.println("--------");
+        System.out.println(b);
+        System.out.println("--------");
+        System.out.println(c);
+    }
+}
+//变量在使用前一定要赋值
+public class variabledemo5 {
+    public static void main(String[] args) {
+        //变量在使用前一定要赋值
+        int g;
+        System.out.println(g);
+    }
+}//代码报错
+//小练习
+public class test1 {
+    public static void main(String[] args) {
+        //一开始没有乘客
+        int count = 0;
+        // 第一站:上去一位乘客
+        //在原有的基础上加一
+        count = count + 1;
+        //第二站:上去两位乘客下来一位乘客
+        count = count - 1 + 2;
+        // 第三站:上去两位乘客，下来一位乘客
+        count = count - 1 + 2;
+        //第四站: 下来一位乘客
+        count = count - 1;
+        //第五站:上去一位乘客
+        count = count + 1;
+        //请问: 到了终点站，车上一共几位乘客
+        System.out.println("此时车上一共有" + count + "人");
+    }
+}
