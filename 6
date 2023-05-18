@@ -3,3 +3,81 @@ projec  项目
 module  模块
 package 包
 class   类
+新建类 模块 项目的步骤。
+
+运算符
+算术运算符
+加减乘除取模
++ - * / %
+public class ArithmeticoperatorDemo1 {
+    public static void main(String[] args) {
+        // +
+        System.out.println(3 + 2); //5
+        // -
+        System.out.println(9 - 1); //8
+        // *
+        System.out.println(5 * 3); //15
+
+        //如果在计算中有小数参与
+        //结论
+        //在代码中，如果有小数参与计算，结果有可能不精确。
+        //暂不解答
+        System.out.println(3.1 + 1.02);
+        System.out.println(2.1 - 1.02);
+        System.out.println(3.1 * 1.1);
+    }
+}
+public class ArithmeticoperatorDemo2 {
+    public static void main(String[] args) {
+        //除法
+        //整数参与计算 结果只能是整数
+        //小数参与计算，结果有可能不精确，精确计算要用到后面的知识点
+        System.out.println(10 / 2);//5
+        System.out.println(10 / 3);//3
+        System.out.println(10.0 / 3);//3.3333333333333335
+        //取模，取余
+        System.out.println(10 % 2);//0
+        System.out.println(10 % 3);//1
+        //取模应用场景
+        //用取模来判断A是否可以被B整除
+        //A%B
+        //判断一个数是不是偶数，A % 2结果为 0 是偶数.
+        //斗地主发牌
+        //三个玩家，把每张牌编号
+        //序号 % 3，结果为1 发给第一个玩家 以此类推
+    }
+}
+import java.util.Scanner;
+
+public class ArithmeticoperatorTest {
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int a = num / 100;
+        int b = num / 10 % 10;
+        int c = num % 10;
+        System.out.println("百位是" + a );
+        System.out.println("十位是" + b );
+        System.out.println("个位是" + c );
+    }
+}
+数据类型不同 不能运算
+数据类型转换
+1.隐式转换 取值范围小变大 自动类型提升
+两种规则 
+取值范围小的和取值范围大的进行运算 小的会先提升为大的，在进行运算
+byte short char 在运算时都会先提升为 int再运算
+2.强制转换 取值范围大变小
+格式 目标数据类型 变量名 = （目标数据类型）被强制转换的数据
+public class ArithmeticoperatorDemo3 {
+    public static void main(String[] args) {
+        byte b1 = 10;
+        byte b2 = 20;
+        int result = b1 + b2;
+        System.out.println(result);//30
+        byte b3 = (byte) (b1 + b2);
+        System.out.println(b3);//30
+    }
+}
+
