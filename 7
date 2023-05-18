@@ -1,0 +1,49 @@
+字符串相加
+当 + 操作中出现字符串时，会将前后的数据进行拼接 产生一个新的字符串
+"123" + 123 结果 "123123"
+连续 + 操作时 从左到右依次执行
+1 + 14 + "iceseto" 结果 "15iceseto"
+        System.out.println("中" + 123 + "abc");//中123abc
+        System.out.println(2 + 1 + "abc" + 2 +1);//3abc21
+        
+字符相加
+当字符 + 字符或者字符 + 数字时 会先把字符转换为其对应的ASCII码值再计算
+        public class ArithmeticoperatorDemo4 {
+    public static void main(String[] args)
+    {
+        char c = 'a';
+        int result = c + 1;
+        System.out.println(result);//98
+        System.out.println('a' + 1);//98
+        System.out.println('a' + "abc");//aabc
+    }
+}
+
+自增自减运算符
+自增++ 自建--
+单独写一行时，-- 和 ++ 无论是在变量的前面还是后面结果都一样
+参与计算
+public class ArithmeticoperatorDemo5 {
+    public static void main(String[] args) {
+        // ++ 和 --
+        int a = 10;
+        a++;
+        System.out.println(a);
+        ++a;
+        System.out.println(a);
+        a--;
+        System.out.println(a);
+        --a;
+        System.out.println(a);
+
+        int x = 10;
+        int y = x++;
+        int z = ++x;
+        System.out.println("x:" + x);
+        System.out.println("y:" + y);
+        System.out.println("z:" + z);
+    }
+}
+
+赋值运算符
+= += -= *= 
