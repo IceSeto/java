@@ -47,3 +47,61 @@ public class ArithmeticoperatorDemo5 {
 
 赋值运算符
 = += -= *= 
+=赋值
++=加后赋值 -=减后赋值 ......
+public class AssigningoperatorDemo1 {
+    public static void main(String[] args) {
+        //+=
+        //规则，左右相加再赋值给左边
+        int a = 10;
+        int b = 20;
+        //把a+b赋值给a
+        a += b;
+        //等同于a = a + b;
+        System.out.println(a);
+        System.out.println(b);
+
+        //细节
+        //+= -= *= /= 底层隐藏强制类型转换
+        short c = 1;
+        c += 1;
+        //左右相加 赋值给c
+        //等同于 s = (short) (s + 1);
+        System.out.println(c);
+    }
+}
+关系运算符
+== != > >= < <=
+== 判断两边是否相等 成立返回true 否则返回false
+!= 判断两边是否不相等 成立返回true 否则返回false
+> 判断左是否大于右 成立返回true 否则返回false
+>= 判断左是否大于等于右 成立返回true 否则返回false
+关系运算符的结果都是boolen类型的 （ture，false） ==  不是   =
+public class CompareoperatorDemo1 {
+    public static void main (String[] args)
+    {
+        // == 判断两边是否相等
+        int a = 10;
+        int b = 10;
+        int c = 20;
+        System.out.println(a == b); //true
+        System.out.println(a == c); //false
+        //!=
+        System.out.println(a != b); //false
+        System.out.println(a != c); //true
+    }
+}
+import java.util.Scanner;
+
+public class Test4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入自己的衣服时髦度");
+        int myFasion = sc.nextInt();
+        System.out.println("请输入她的衣服时髦度");
+        int herFasion = sc.nextInt();
+
+        boolean result = myFasion > herFasion;
+        System.out.println(result);
+    }
+}
