@@ -1,0 +1,98 @@
+逻辑运算符
+&  |  ^  !
+与 或 异或 非
+& 两边为真 才为真
+| 两边为假 才为假
+^异或 相同为false，不同为true
+! 非 取反
+public class LogicoperatorDemo1 {
+    public static void main(String[] args) {
+        // & 并
+        //两边都为真 结果为真
+        System.out.println(true & true);
+        System.out.println(false & false);//false
+        System.out.println(true & false);//false
+        System.out.println(false & true);//false
+
+        // | 或
+        //两边都为假 结果为假
+        System.out.println(true | true);//true
+        System.out.println(false | false);//false
+        System.out.println(true | false);//true
+        System.out.println(false | true);//true
+    }
+}
+public class LogicoperatorDemo2 {
+    public static void main(String[] args) {
+        //^ 逻辑异或
+        // 相同为false 不同为true
+        System.out.println(true ^ true);//false
+        System.out.println(false ^ false);//false
+        System.out.println(true ^ false);//true
+        System.out.println(false  ^ true);//true
+
+        //! 逻辑非
+        //取反
+        //提示 取反的感叹号 要么不写 要么只写一次
+        System.out.println(!false);//true
+        System.out.println(!true);//false
+    }
+}
+短路运算符
+&&  ||
+而且  或者
+public class LogicoperatorDemo3 {
+    public static void main(String[] args) {
+        //&&
+        //结果与&相同
+        ///两边都为真 结果才是真
+        System.out.println(true && true);//true
+        System.out.println(false && false);//false
+        System.out.println(true && false);//false
+        System.out.println(false && true);//false
+        //||
+        //运行结果与|一样
+        //两边都是假 结果才是假
+        System.out.println(true || true);//true
+        System.out.println(false || false);//false
+        System.out.println(true || false);//true
+        System.out.println(false || true);//true
+
+        //短路运算符有短路效果
+        //当左边的表达式能确定最终结果时，右边就不会参与运行
+        int a = 10;
+        int b = 10;
+        boolean result = ++a < 5 && ++b < 5;
+        System.out.println(result);
+        System.out.println(a);
+        System.out.println(b);
+    }
+    import java.util.Scanner;
+
+public class Test5 {
+    public static void main(String[] args) {
+        // 输入两个数 如果a或者b为6 或者a+b是6的倍数 结果为真
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        boolean result = a == 6||b == 6|| (a + b) % 6 == 0;
+        System.out.println(result);
+    }
+}
+三元运算符
+格式
+关系表达式?表达式1:表达式2;
+关系表达式是否真 为真执行表达式1 否则执行表达式2
+import java.util.Scanner;
+
+public class TernaryoperatorDemo1 {
+    public static void main(String[] args) {
+        //使用三元运算符，获取两个数的最大值
+        Scanner sc = new Scanner(System.in);
+        int number1 = sc.nextInt();
+        int number2 = sc.nextInt();
+        int max = number1 > number2?number1:number2;
+        //三元运算符的结果必须要被使用 否则会报错
+        System.out.println(max);
+    }
+}
