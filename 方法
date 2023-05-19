@@ -1,0 +1,114 @@
+方法是程序中的最小执行单位
+打包调用方法---提高代码的复用性 提高代码的可维护性
+1.打包
+（1）无参数最简单格式
+public static void 方法名(){
+  方法体（打包的代码）;
+}  
+（2）带参数格式
+public static void 方法名(参数1,参数2,………………){
+  ……………………
+}
+2.调用
+（1）无参数最简单格式
+方法名();
+（2）带参数格式
+方法名(参数1,参数2,…………);
+
+注意！ 方法调用时（形参与实参一一对应）参数的数量和类型必须于方法定义中小括号里的变量一一对应，否则将报错。
+形参与实参
+形参：方法定义中的参数
+实参：方法调用中的参数
+package methoddemo;
+public class MethodDemo1 {
+    public static void main(String[] args) {
+        //目标：掌握最简单的方法定义和调用的格式
+        //调用方法
+        playGame();
+        playGame();
+    }
+    //定义应该方法
+    public static void playGame(){
+        System.out.println("选人物");
+        System.out.println("准备开局");
+        System.out.println("对线");
+        System.out.println("崩盘");
+        System.out.println("骂队友");
+        System.out.println("送人头");
+        System.out.println("GG");
+    }
+}
+
+package methoddemo;
+public class MethodDemo2 {
+    public static void main(String[] args) {
+        //目标：利用方法最简单的格式完成联系
+        //调用方法
+        printGFInfo();
+    }
+    public static void printGFInfo(){
+        System.out.println("逍");
+        System.out.println("萌妹子");
+        System.out.println("18岁");
+    }
+}
+
+package methoddemo;
+public class MethodDemo3 {
+    public static void main(String[] args) {
+        //目标；利用方法最简单的格式完成
+        //需求：在方法里定义两个变量并打印求和
+        getSum();
+    }
+    public static void getSum(){
+        int num1 = 10;
+        int num2 = 20;
+        int result = num1 + num2;
+        System.out.println(result);
+    }
+}
+
+package methoddemo;
+public class MethodDemo4 {
+    public static void main(String[] args) {
+        //带参数方法定义与调用
+        getSum(10,20);
+    }
+    public static void getSum(int sum1,int sunm2){
+        int result = sum1 + sunm2;
+        System.out.println(result);
+    }
+}
+
+package new1.test;
+
+public class Test1 {
+    public static void main(String[] args) {
+        //需求：定义应该方法，求正方形的周长，将结果在方法中打印。
+        //目标：根据不同的需求，选择定义无参的方法，还是带参数的方法
+    getLength(20.2,22.3);
+    }
+        //1.我要干嘛 求长方形的周长
+        //2.干这件事情需要什么 长宽
+    public static void getLength(double len,double width){
+        double result = ( len + width ) * 2;
+        System.out.println(result);
+    }
+}
+
+package new1.test;
+
+public class Test2 {
+    public static void main(String[] args) {
+        //需求：定义应该方法，求正方形的周长，将结果在方法中打印。
+        //目标：根据不同的需求，选择定义无参的方法，还是带参数的方法
+        getArea(22.1);
+    }
+
+    //1我要干嘛 求圆面积
+    //2需要什么 半径的平方
+    public static void getArea( double radius){
+        double result = 3.14 * radius *radius;
+        System.out.println(result);
+    }
+}
