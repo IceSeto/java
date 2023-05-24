@@ -9,11 +9,23 @@ public static void 方法名(){
 public static void 方法名(参数1,参数2,………………){
   ……………………
 }
+（3）带返回值方法定义
+public static 返回值类型 方法名（参数）{
+  方法体；
+  return 返回值;
+}
 2.调用
 （1）无参数最简单格式
 方法名();
 （2）带参数格式
 方法名(参数1,参数2,…………);
+（3）带返回值方法调用
+  1.直接调用
+  方法名（实参）
+  2.赋值调用
+  整数类型 变量名 = 方法名（实参）;
+  3.输出调用
+  System.out.println(方法名（实参）);
 
 注意！ 方法调用时（形参与实参一一对应）参数的数量和类型必须于方法定义中小括号里的变量一一对应，否则将报错。
 形参与实参
@@ -111,4 +123,76 @@ public class Test2 {
         double result = 3.14 * radius *radius;
         System.out.println(result);
     }
+}
+package new1.methoddemo;
+
+public class MethodDemo5 {
+    public static void main(String[] args) {
+        //掌握带返回值方法的定义和调用
+
+        //直接调用
+        getSum(10,20,30);
+        //赋值调用
+        int sum = getSum(10,20,30);
+        System.out.println(sum);
+        //输出调用
+        System.out.println(getSum(10,20,30));
+
+        //计算第一个季度的营业额
+        int num1 = getSum(10,20,30);
+        //二
+        int num2 = getSum(10,20,30);
+        //三
+        int num3 = getSum(10,20,30);
+        //四
+        int num4 = getSum(10,20,30);
+        //求全年的营业额
+        int num = num1 + num2 + num3 + num4;
+        System.out.println(num);
+    }
+    public static int getSum(int num1,int num2,int num3){
+        int result = num1 + num2 + num3;
+        return result;//返回给方法的调用处
+    }
+}
+
+package new1.test;
+
+public class Test3 {
+    public static void main(String[] args) {
+        //目标；要能区分出什么时候使用带返回值的方法
+        //需求；定义方法，比较两个长方形的面积
+        //调用方法获取长方形的面积在比较
+        double area1 = getArea(4.6,3.3);
+        double area2 = getArea(7.2,2.4);
+
+        if(area1 > area2){
+            System.out.println("第一个大");
+        }else{
+            System.out.println("第二个大");
+        }
+    }
+        //定义一个方法求长方形面积
+        //1.我要干嘛?求长方形的面积
+        //2.需要什么? 长 和 宽
+        //3.方法的调用处，是否需要继续使用方法的结果//如果要用，那么方法必须有返回值
+        //如果不要用，方法可以写返回值，也可以不写返回值
+    public static double getArea(double len,double width){
+        double area = len * width;
+        return area;
+    }
+
+
+    //在以后实际开发当中，我们一般是把重复的代码或者具有独立功能的代码抽取到方法当中。//以后我们直接调用就可以了
+//1.我要干嘛?比较两个长方形的面积
+//2.需要什么? 两个长 两个宽
+    /*public static void compare(double len1, double width1, double len2, double width2)
+    (double areal = len1 * width1;
+    double area2 = len2 * width2;
+    if(area1 > area2)f
+    System.out.printIn("第一个长方形更大");}
+    else
+    (System.out.printIn("第二个长方形更大");
+        }
+        }*/
 }
