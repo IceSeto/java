@@ -283,6 +283,169 @@ public  class Test5 {
     }
 }
 
+package Test;
+
+import java.util.Scanner;
+
+public class Test6 {
+    public static void main(String[] args) {
+        /*
+        某系统的数字密码(大于o) 。比如1983，采用加密方式进行传输，规则如下:
+        每位数加上5
+        再对10求余，
+        最后将所有数字反转，
+        得到一串新数。
+             */
+
+
+        //分析
+        //1.把整数中的每一位书放到数组中
+        //反向推导
+        //
+        //1.计算出数组的长度
+        int num = 12345;
+        //定义一个变量临时记录num
+        int temp = num;
+        int count = 0;
+        while (num != 0) {
+            //去掉右边第一位
+            num = num / 10;
+            //计数器自增
+            count++;
+        }
+        //2。定义数组
+        int[] arr = new int[count];
+        //3.把证书上的每一位放到数组中
+        int index = arr.length - 1;
+        while (temp != 0) {
+            //获取temp中的每一位数字
+            int ge = temp % 10;
+            //去掉最左边的数字
+            temp = temp / 10;
+             //添加
+            arr[index] = ge;
+            index--;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+        //2.加密
+        //每位数加上5
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] += 5;
+        }
+        //再对10求余
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] %= 10;
+        }
+        //最后将所有数字反转
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
+            int temp1 = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        //8  3  4  6 -->8346
+        int number = 0;
+        for (int i = 0; i < arr.length; i++) {
+            number = number * 10 + arr[i];
+        }
+        System.out.println(number);
+        //3.把数组中的每一位数字进行拼接，变成结果
+    }
+}
+
+
+package Test;
+
+public class Test7 {
+    public static void main(String[] args) {
+        /*
+        某系统的数字密码(大于e) 。比如1983，采用加密方式进行传输，规则如下:
+        每位数加上5
+        再对10求余，
+        最后将所有数字反转，
+        得到一串新数。
+        按照以上规则进行解密:
+        比如1983加密之后变成8346，解密之后变成1983
+         */
+        //定义数组记录解密后的结果
+        int[] arr = {8, 3, 4, 6};
+        //反转
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        //由于加密是通过对十取余的方法获取到
+        //所以在解密时 0~4之间需要加10 5~9不变
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] >= 0 && arr[i] <= 4) {
+                arr[i] = arr[i] + 10;
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i] - 5;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        int num = 0;
+        for (int i = 0; i < arr.length; i++) {
+            num = num*10+arr[i];
+        }
+        System.out.println(num);
+    }
+}
+
+package Test;
+
+import java.util.Random;
+
+public class Test8 {
+    public static void main(String[] args) {
+        /*
+        需求:
+        一个大V直播抽奖，奖品是现金红包，分别有{2，588 ，888，1000，10000}五个奖金。请使用代码模拟抽奖，打印出每个奖项，
+        奖项的出现顺序要随机且不重复。打印效果如下:(随机顺序，不一定是下面的顺序)
+        888元的奖金被抽出
+        588元的奖金被抽出
+        10000元的奖金被抽出
+        1000元的奖金被抽出
+        2元的奖金被抽出
+         */
+        //定义数组 奖池
+        int[] arr = {2, 588, 888, 1000, 10000};
+        //定义新的数组用于存储抽奖结果
+        int[] newArr = new int[arr.length];
+        Random r = new Random();
+        for (int i = 0, j = 0; i < arr.length; ) {
+            int index = r.nextInt(arr.length);
+            int prize = arr[index];
+            //判断当前奖项是否存在 存在则重新抽取
+            if (!contains(newArr, prize)) {
+                //有效奖项抽取到arr中
+                newArr[i] = prize;
+                i++;
+
+            }
+        }
+        //遍历数组
+        for (int i = 0; i < newArr.length; i++) {
+            System.out.println(newArr[i]);
+        }
+    }
+
+    //prize在僵持中是否存在
+    //存在返回true 不存在返回false
+    public static boolean contains(int[] arr, int prize) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == prize) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
 
 
