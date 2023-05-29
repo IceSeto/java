@@ -1,0 +1,119 @@
+package src.twodimensionarr;
+
+public class TwoDimensionDemo1 {
+    public static void main(String[] args) {
+        /*
+        二维数组静态初始化格式:
+            数据类型[][] 数组名 = new 数据类型[][] 元素1,元素2],元素1，元素2]};
+        简化格式:
+            数据类型[][] 数组名 = [元素1,元素2]，[元素1，元素2]};
+        元素访问:
+            数组名[索引][索引];
+        二维数组遍历:
+            先得到一维数组，再遍历一维数组获取元素
+             */
+        //1.二维数组静态初始化格式
+        //数据类型[][] 数组名 = new 数据类型[][] [元素1,元素2],[元素1，元素2}];
+        int[][] arr1 = {{1, 2, 3}, {4, 5, 6}};
+        int[][] arr2 = {{1, 2, 3}, {4, 5, 6}};
+        //建议这样定义每个一维数组占一行
+        //每个一维数组之间要加逗号，但是最后一个不需要
+        int[][] arr3 = {
+                {1, 2, 3},
+                {4, 5, 6, 7, 8}
+        };
+        //2。获取元素
+        //arr二维数组
+        //arr[i][j]
+        //i:二维数组的索引获取的是一维数组
+        //j；获取真正的元素
+        System.out.println(arr3[0]); //[I@4eec7777 地址值 //获取二维数组中第一个一维数组
+        //arr3[0]获取二维数组中第一个一维数组
+        //arr3[0][0] 第一个一维数组中的第一个值
+        System.out.println(arr3[0][0]);
+
+        System.out.println(arr3[1][4]);//打印数字8
+
+        //System.out.println(arr3[2][0]);//报错 ArrayIndexOutOfBoundsException
+        //3.遍历二维数组
+        for (int i = 0; i < arr3.length; i++) {
+            //i表示二维数组的索引 对应每个一维数组
+            //arr3[i]
+            for (int j = 0; j < arr3[i].length; j++) {
+                //j:每个元素
+                System.out.print(arr3[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+package src.twodimensionarr;
+
+public class TwoDimensionDemo2 {
+    public static void main(String[] args) {
+        /*
+        维数组动态初始化格式:
+        数据类型[][] 数组名 = new 数据类型[m][n];
+        m表示这个二维数组，可以存放多少个一维数组
+        n表示每一个一维数组，可以存放多少个元素
+         */
+
+        //1.利用动态初始化格式创建二维数组
+        //3:表示二维数组长度为3，可以装3个一维数组
+        // 5: 表示每一个一维数组的长度都是5，可以装5个int类型的元素
+        int[][] arr = new int[3][5];
+        //改为二维数组赋值一个元素
+        arr[0][0] = 10;
+        //遍历
+        //外循环获取每一个一维数组
+        //内循环获取一维数组中的元素
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+package src.twodimensionarr;
+
+public class TwoDimensionTest {
+    public static void main(String[] args) {
+        /*
+        某商城每个季度的营业额如下: 单位(万元)
+        第一季度: 22,66,44
+        第二季度: 77,33,88
+        第三季度: 25,45,65
+        第四季度: 11,66,99
+        要求计算出每个季度的总营业额和全年的总营业额*
+         */
+        int[][] yearArrArr = {
+                {22, 66, 44},
+                {77, 33, 88},
+                {25, 45, 65},
+                {11, 66, 99}
+        };
+        int yearSum = 0;
+        for (int i = 0; i < yearArrArr.length; i++) {
+            int[] quarterArr = yearArrArr[i];
+            int sum = seasonTatal(quarterArr);
+            System.out.println("第"+(i+1)+"季度的营业额是"+sum);
+            yearSum = yearSum + sum;
+        }
+        //总
+
+        System.out.println("总营业额："+ yearSum );
+    }
+
+    public static int seasonTatal(int[] arr) {
+        int seaTatal = 0;
+        for (int i = 0; i < arr.length; i++) {
+            seaTatal += arr[i];
+        }
+        return seaTatal;
+    }
+}
