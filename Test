@@ -448,6 +448,115 @@ public class Test8 {
 }
 
 
+package Test;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Test11 {
+    public static void main(String[] args) {
+        //模拟双色球
+        //生成中奖号码
+        int[] arr = createNumber();
+        //用户输入彩票号码
+        int[] num = userInPutNumber();
+        int redCount = 0;
+        int blueCount = 0;
+        for (int i = 0; i < num.length - 1; i++) {
+            int redNumber = num[i];
+            for (int j = 0; j < arr.length - 1; j++) {
+                if (redNumber == arr[j]) {
+                    redCount++;
+                    //找到了直接跳出
+                    break;
+                }
+            }
+        }
+        int blueNumber = num[num.length - 1];
+        if (blueNumber == arr[arr.length - 1]) {
+            blueCount++;
+        }
+        System.out.println(redCount);
+        System.out.println(blueCount);
+        if (redCount == 6 && blueCount == 1) {
+            System.out.println("一等奖");
+        } else if (redCount == 6 && blueCount == 0) {
+            System.out.println("二等奖");
+        } else if (redCount == 5 && blueCount == 1) {
+            System.out.println("三等奖");
+        } else if ((redCount == 5 && blueCount == 0) || (redCount == 4 && blueCount == 1)) {
+            System.out.println("四等奖");
+        } else if ((redCount == 4 && blueCount == 0) || (redCount == 3 && blueCount == 1)) {
+            System.out.println("五等奖");
+        } else if ((redCount == 2 && blueCount == 1) || (redCount == 1 && blueCount == 1) || (redCount == 0 && blueCount == 1)) {
+            System.out.println("七等奖");
+        }else{
+            System.out.println("未中奖");
+        }
+    }
+            public static int[] userInPutNumber() {
+                int[] arr = new int[7];
+                System.out.println("请输入6个红球号码（1~33）且各不相同。");
+                Scanner sc = new Scanner(System.in);
+                for (int i = 0; i < 6; ) {
+                    System.out.println("请输入第" + (i + 1) + "个球的号码");
+                    int redNumber = sc.nextInt();
+                    if (redNumber >= 1 && redNumber <= 33) {
+                        boolean flag = contains(arr, redNumber);
+                        if (!flag) {
+                            arr[i] = redNumber;
+                            i++;
+                        } else {
+                            System.out.println("已存在请重新输入");
+                        }
+                    } else {
+                        System.out.println("超出范围请重新输入！");
+                    }
+                }
+                System.out.println("请输入蓝球号码（1~16）。");
+                int Bluenumber = sc.nextInt();
+                while (true) {
+                    if (Bluenumber >= 1 && Bluenumber <= 16) {
+                        arr[6] = Bluenumber;
+                        break;
+                    } else {
+                        System.out.println("输入错误请重新输入！");
+                    }
+                }
+                return arr;
+            }
+
+            public static int[] createNumber () {
+                //1创建数组
+                int[] arr = new int[7];
+
+                //2随机生成号码并添加到数组中
+                //红球中的号码不能重复 1~33
+                //蓝球 1~16
+                //生成红球号码
+                Random r = new Random();
+                for (int i = 0; i < 6; ) {
+                    int RedNumber = r.nextInt(33) + 1;
+                    if (!contains(arr, RedNumber)) {
+                        arr[i] = RedNumber;
+                        i++;
+                    }
+                }
+
+                arr[6] = r.nextInt(16) + 1;
+                return arr;
+            }
+
+            //用于判断数字在数组总是否存在
+            public static boolean contains ( int[] arr, int RedNumber){
+                for (int i = 0; i < arr.length; i++) {
+                    if (RedNumber == arr[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
 
 
 
