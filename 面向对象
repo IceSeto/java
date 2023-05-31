@@ -139,12 +139,181 @@ public class GirlFriendTest {
     }
 }
 
+
+package src.Test3;
+
+public class GrilFriend {
+
+    private int age;//0
+
+    public void method(){
+        int age = 10;//10
+        System.out.println(age);
+        System.out.println(this.age);
+    }
+}
+
+package src.Test3;
+
+public class GrilFriend {
+
+    private int age;//0
+
+    public void method(){
+        int age = 10;//10
+        System.out.println(age);
+        System.out.println(this.age);
+    }
+}
+
 当成员变量与局部变量相同时 就近原则 要想使用成员变量 就要用this.
 this关键字
+this的作用: 区分局部变量和成员变量
+this的本质: 所在方法调用者的地址值
+构造方法
+方法名与类名相同，大小写也要一致
+没有返回值类型，连void都没有
+没有具体的返回值 (不能由retrun带回结果数据
+
+创建对象的时候由虚拟机调用，不能手动调用构造方法每创建一次对象，就会调用一次构造方法
+
+构造方法的定义
+如果没有定义构造方法，系统将给出一个默认的无参数构造方法如果定义了构造方法，系统将不再提供默认的构造方法
+构造方法的重载
+带参构造方法，和无参数构造方法，两者方法名相同，但是参数不同，这叫做构造方法的重载
+推荐的使用方式
+无论是否使用，都手动书写无参数构造方法，和带全部参数的构造方法
+创造对象的时候，虚拟机会自动调用构造方法，作用是给成员变量进行初始化的
+
+标准的JavaBean类
+类名需要见名知意
+成员变量使用private修饰
+提供至少两个构造方法
+无参构造方法
+带全部参数的构造方法
+成员方法
+提供每一个成员变量对应的setXxx()/getXxx()如果还有其他行为，也需要写上
+package src.Test5;
+
+public class Student {
+    private String name;
 
 
+    private int age;
+
+    //如果没有写任何构造方法
+    //虚拟机会给我们加一个空参构造方法
+    public Student(){
+        System.out.println("执行");
+    }
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
 
+}
+package src.Test5;
+
+public class StudentTest {
+    public static void main(String[] args) {
+        //创建对象
+        //调用空参构造
+        Student s = new Student();
+        //调用有参构造
+        Student s1 = new Student("张三",23);
+        System.out.println(s1.getName());
+        System.out.println(s1.getAge());
+    }
+}
+
+标准javabean
+package src.Test6;
+
+public class User {
+    //属性
+    private String name;
+    private String password;
+    private String emill;
+    private char gender;
+    private int age;
+    //空参
+
+    public User() {}
+
+    //带全部参数
+    //快捷键 alt+insert
+    //插件PTG 1秒生成标准Javabean
+    public User(String name, String password, String emill, char gender, int age) {
+        this.name = name;
+        this.password = password;
+        this.emill = emill;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    //getset方法
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmill() {
+        return emill;
+    }
+
+    public void setEmill(String emill) {
+        this.emill = emill;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+package src.Test6;
+
+public class UserTest {
+}
 
 
 
