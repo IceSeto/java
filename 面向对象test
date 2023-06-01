@@ -1,0 +1,864 @@
+package src.iceseto.test1;
+
+import java.util.Random;
+
+public class Role {
+    private String name;
+    private int blood;
+
+    public Role() {
+    }
+
+    public Role(String name, int blood) {
+        this.name = name;
+        this.blood = blood;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getBlood() {
+        return blood;
+    }
+
+    public void setBlood(int blood) {
+        this.blood = blood;
+    }
+
+    //定义一个方法用于攻击
+    //思考谁攻击谁？
+    //Role r1 = new Role();
+    //Role r2 = new Role();
+    //r1.攻击（r2）;
+    //方法的调用者攻击（参数）;
+    public void attack(Role role) {
+        //造成的伤害是随机的 1~20
+        Random r = new Random();
+        int hurt = r.nextInt(20) + 1;
+        //修改一下挨揍人的血量
+        int remainBlood = role.getBlood() - hurt;
+        //对剩余血量做一个认证 如果为负数则修正为零
+        remainBlood = remainBlood< 0 ? 0 : remainBlood;
+        role.setBlood(remainBlood);
+
+        //this.表示方法的调用者
+        System.out.println(this.getName() + "举起拳头打了" + role.getName() + "一下，" +
+                "造成了" + hurt + "点伤害" + role.getName()+"还剩下"+remainBlood+"点血量");
+        if (remainBlood == 0){
+            System.out.println(role.getName()+"死亡");
+        }
+    }
+}
+
+package src.iceseto.test1;
+
+public class Gametest {
+    public static void main(String[] args) {
+        //第一个角色
+        Role r1 = new Role("乔峰", 100);
+        //第二个角色
+        Role r2 = new Role("鸠摩智", 100);
+        //开始格斗
+        while (true) {
+            //r1攻击r2
+            r1.attack(r2);
+            //判断r2的剩余血量
+            if (r2.getBlood() == 0){
+                System.out.println(r1.getName()+"K.O了"+r2.getName());
+                break;}
+            //r1攻击r2
+            r2.attack(r1);
+            //判断r2的剩余血量
+            if (r1.getBlood() == 0){
+                System.out.println(r2.getName()+"K.O了"+r1.getName());
+                break;
+            }
+        }
+    }
+}
+package src.iceseto.test2;
+
+import java.util.Random;
+
+public class Role {
+    private String name;
+    private int blood;
+    private char gender;
+    private String face;//长相是随机的
+
+    String[] boyfaces = {"风流俊雅", "气宇轩昂", "相貌英俊", "五官端正", "相貌平平", "一塌糊涂", "面目狰狞"};
+    String[] girlfaces = {"美奂绝伦", "沉鱼落雁", "婷婷玉立", "身材娇好", "相貌平平", "相貌简陋", "惨不忍睹"};
+
+
+    //attack 攻击描述：
+    String[] attacks_desc={
+            "%s使出了一招【背心钉】，转到对方的身后，一掌向%s背心的灵台穴拍去。",
+            "%s使出了一招【游空探爪】，飞起身形自半空中变掌为抓锁向%s。",
+            "%s大喝一声，身形下伏，一招【劈雷坠地】，捶向%s双腿。",
+            "%s运气于掌，一瞬间掌心变得血红，一式【掌心雷】，推向%s。",
+            "%s阴手翻起阳手跟进，一招【没遮拦】，结结实实的捶向%s。",
+            "%s上步抢身，招中套招，一招【劈挂连环】，连环攻向%s。"
+    };
+
+    //injured 受伤描述：
+    String[] injureds_desc={
+            "结果%s退了半步，毫发无损",
+            "结果给%s造成一处瘀伤",
+            "结果一击命中，%s痛得弯下腰",
+            "结果%s痛苦地闷哼了一声，显然受了点内伤",
+            "结果%s摇摇晃晃，一跤摔倒在地",
+            "结果%s脸色一下变得惨白，连退了好几步",
+            "结果『轰』的一声，%s口中鲜血狂喷而出",
+            "结果%s一声惨叫，像滩软泥般塌了下去"
+    };
+    public Role() {
+    }
+
+    public Role(String name, int blood, char gender) {
+        this.name = name;
+        this.blood = blood;
+        this.gender = gender;
+        setFace(gender);
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public void setFace(char gemder) {
+        Random r = new Random();
+        //长相是随机的
+        if (gender == '男') {
+            //从boyfance 中随机
+            int index = r.nextInt(boyfaces.length);
+            this.face = boyfaces[index];
+        } else if (gender == '女') {
+            //从girlface中随机
+            int index = r.nextInt(girlfaces.length);
+            this.face = girlfaces[index];
+        } else {
+            this.face = "面目狰狞";
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getBlood() {
+        return blood;
+    }
+
+    public void setBlood(int blood) {
+        this.blood = blood;
+    }
+
+    //定义一个方法用于攻击
+    //思考谁攻击谁？
+    //Role r1 = new Role();
+    //Role r2 = new Role();
+    //r1.攻击（r2）;
+    //方法的调用者攻击（参数）;
+    public void attack(Role role) {
+        Random r = new Random();
+        int index = r.nextInt(attacks_desc.length);
+        String KungFu = attacks_desc[index];
+
+        //输出一个攻击的效果
+        System.out.printf(KungFu,this.getName(),role.getName());
+        System.out.println();
+        //造成的伤害是随机的 1~20
+        int hurt = r.nextInt(20) + 1;
+        //修改一下挨揍人的血量
+        int remainBlood = role.getBlood() - hurt;
+        //对剩余血量做一个认证 如果为负数则修正为零
+        remainBlood = remainBlood < 0 ? 0 : remainBlood;
+        role.setBlood(remainBlood);
+
+        //this.表示方法的调用者
+        //受伤的描述
+        //血量>90 0索引的描述
+        //80~90  1
+        //70~80  2
+        //60~70  3
+        //40~60  4
+        //20~40  5
+        //10~20  6
+        //小于10  7
+        if (remainBlood >= 90){
+            System.out.printf(injureds_desc[0],role.getName());
+        }else if (remainBlood >= 80&&remainBlood<90){
+            System.out.printf(injureds_desc[1],role.getName());
+        } else if (remainBlood>=70&&remainBlood<80) {
+            System.out.printf(injureds_desc[2],role.getName());
+        }else if (remainBlood>=60&&remainBlood<70) {
+            System.out.printf(injureds_desc[3], role.getName());
+        }else if (remainBlood>=40&&remainBlood<60) {
+            System.out.printf(injureds_desc[4], role.getName());
+        }else if (remainBlood>=20&&remainBlood<40) {
+            System.out.printf(injureds_desc[5], role.getName());
+        }else if (remainBlood>=10&&remainBlood<20) {
+            System.out.printf(injureds_desc[6], role.getName());
+        }else if (remainBlood>=0&&remainBlood<10) {
+            System.out.printf(injureds_desc[7], role.getName());
+        }
+        System.out.println();
+        if (remainBlood == 0) {
+            System.out.println(role.getName() + "死亡");
+        }
+
+    }
+    public void showRoleInfo(){
+        System.out.println("姓名"+getName());
+        System.out.println("血量"+getBlood());
+        System.out.println("性别"+getGender());
+        System.out.println("长相"+getFace());
+    }
+}
+
+
+package src.iceseto.test2;
+
+public class Gametest {
+    public static void main(String[] args) {
+        //第一个角色
+        Role r1 = new Role("乔峰", 100, '男');
+        //第二个角色
+        Role r2 = new Role("鸠摩智", 100,'男');
+        r1.showRoleInfo();
+        r2.showRoleInfo();
+        //开始格斗
+        while (true) {
+            //r1攻击r2
+            r1.attack(r2);
+            //判断r2的剩余血量
+            if (r2.getBlood() == 0){
+                System.out.println(r1.getName()+"K.O了"+r2.getName());
+                break;}
+            //r1攻击r2
+            r2.attack(r1);
+            //判断r2的剩余血量
+            if (r1.getBlood() == 0){
+                System.out.println(r2.getName()+"K.O了"+r1.getName());
+                break;
+            }
+        }
+    }
+}
+package src.iceseto.test2;
+
+public class Test {
+    public static void main(String[] args) {
+        //两部分参数
+        //第一部分参数：要输出的内容 %s占位
+        //第二部分参数；要填充的数据
+        System.out.printf("你好啊%s","z");
+        System.out.println();
+        System.out.printf("%s你好啊%s","z","x");
+    }
+}
+package src.iceseto.test3;
+
+public class Goods {
+    private String id;
+    private String name;
+    private double price;
+    private int count;
+
+    public Goods() {
+    }
+
+    public Goods(String id, String name, double price, int count) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.count = count;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+}
+package src.iceseto.test3;
+
+public class GoodTest {
+    public static void main(String[] args) {
+        //创建数组
+        Goods[] arr = new Goods[3];
+
+        //创建三个商品对象
+        Goods g1 = new Goods("001","手机",5000.0,100);
+        Goods g2 = new Goods("002","保温杯",227.0,10);
+        Goods g3 = new Goods("003","枸杞",12.7,70);
+        //把商品添加到数组中
+        arr[0] = g1;
+        arr[1] = g2;
+        arr[2] = g3;
+        //遍历
+        for (int i = 0; i < arr.length; i++) {
+            Goods good = arr[i];
+            System.out.println(good.getCount()+" "+good.getPrice()+" "+good.getName()+" "+good.getId());
+        }
+    }
+}
+package src.iceseto.test4;
+
+public class Cars {
+    private String brand;
+    private double price;
+    private String color;
+
+    public Cars() {
+    }
+
+    public Cars(String brand, double price, String color) {
+        this.brand = brand;
+        this.price = price;
+        this.color = color;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+}
+package src.iceseto.test4;
+
+import java.util.Scanner;
+
+public class CarsTest {
+    public static void main(String[] args) {
+
+        Cars c1 = new Cars();
+        Cars c2 = new Cars();
+        Cars c3 = new Cars();
+        Cars[] c = new Cars[3];
+        c[0] = c1;
+        c[1] = c2;
+        c[2] = c3;
+        for (int i = 0; i < 3; i++) {
+            System.out.println("请依次输入第"+(i+1)+"辆汽车的 品牌 价格 颜色");
+            Scanner sc = new Scanner(System.in);
+            String brand = sc.next();
+            double price = sc.nextDouble();
+            String color = sc.next();
+            c[i].setBrand(brand);
+            c[i].setPrice(price);
+            c[i].setColor(color);
+        }
+        for (int i = 0; i < c.length; i++) {
+            System.out.print(c[i].getBrand());
+            System.out.print(c[i].getPrice());
+            System.out.print(c[i].getColor());
+            System.out.println();
+        }
+    }
+}
+  package src.iceseto.test4;
+
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+        //键盘录入
+        //第一套体系 遇到空格 制表符 回车 就停止
+        //nextInt(); 接收键盘录入的整数
+        //nextDouble（）; 接受小数
+        //next(); 接收字符串
+        //第二套体系
+        //nextLine();接受字符串
+        //可以接收空格制表符 遇到回车 才停止
+/*        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入第一个整数");
+        int sum1 = sc.nextInt();
+        System.out.println(sum1);
+        System.out.println("请输入第二个整数");
+        int sum2 = sc.nextInt();
+        System.out.println(sum2);*/
+/*        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入一个字符串");
+        String str1 = sc.next();//abc
+        System.out.println(str1);
+        System.out.println("请输入第二个字符串");
+        String str2 = sc.next();//bcd
+        System.out.println(str2);*/
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入第一个字符串");
+        String line1 = sc.nextLine();
+        System.out.println(line1);
+        System.out.println("请输入第二个字符串");
+        String line2 = sc.nextLine();
+        System.out.println(line2);
+
+    }
+}
+package src.iceseto.test4;
+
+import java.util.Scanner;
+
+public class Test2 {
+    public static void main(String[] args) {
+        //键盘录入的两套体系不能混用
+        //先用nextInt(); 再用nextLine();会导致后者接收不到数据
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入一个整数");
+        int i = sc.nextInt();
+        System.out.println(i);
+        System.out.println("请输入一个字符串");
+        String line = sc.nextLine();
+        System.out.println(line);
+    }
+}
+package src.iceseto.test5;
+
+public class Phone {
+    private String brand;
+    private double price;
+    private String color;
+
+    public Phone() {
+    }
+
+    public Phone(String brand, double price, String color) {
+        this.brand = brand;
+        this.price = price;
+        this.color = color;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+}
+package src.iceseto.test5;
+
+public class PhoneTest {
+    public static void main(String[] args) {
+        //创建数组
+        Phone[] arr = new Phone[3];
+        //创建对象
+        Phone p1 = new Phone("小米",1000,"绿色");
+        Phone p2 = new Phone("oppo",2000,"红色");
+        Phone p3 = new Phone("vivo",3000,"紫色");
+        arr[0] = p1;
+        arr[1] = p2;
+        arr[2] = p3;
+        double sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            Phone phone = arr[i];
+            sum = sum + phone.getPrice();
+        }
+        System.out.println("平均价格："+(sum/ arr.length));
+    }
+}
+package src.iceseto.test6;
+
+public class GirlFriend {
+    private String name;
+    private int age;
+    private char gender;
+    private String habit;
+
+    public GirlFriend() {
+    }
+
+    public GirlFriend(String name, int age, char gender, String habit) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.habit = habit;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public String getHabit() {
+        return habit;
+    }
+
+    public void setHabit(String habit) {
+        this.habit = habit;
+    }
+    public void GFInfo(){
+        System.out.println(this.getName());
+        System.out.println(this.getGender());
+        System.out.println(this.getAge());
+        System.out.println(this.getHabit());
+    }
+}
+package src.iceseto.test6;
+
+public class GirlFriendTest {
+    public static void main(String[] args) {
+        GirlFriend[] arr = new GirlFriend[4];
+        GirlFriend gf1 = new GirlFriend("1",18,'1',"一");
+        GirlFriend gf2 = new GirlFriend("2",20,'1',"二");
+        GirlFriend gf3 = new GirlFriend("3",19,'1',"三");
+        GirlFriend gf4 = new GirlFriend("4",20,'1',"四");
+        arr[0] = gf1;
+        arr[1] = gf2;
+        arr[2] = gf3;
+        arr[3] = gf4;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            GirlFriend gf = arr[i];
+            sum = sum +gf.getAge();
+        }
+        int avg_age =sum / arr.length;
+        System.out.println(avg_age);
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i].getAge()<avg_age){
+                arr[i].GFInfo();
+            }
+        }
+    }
+}
+package src.iceseto.test7;
+
+public class Student {
+    private int id;
+    private String name;
+    private int age;
+
+    public Student() {
+    }
+
+    public Student(int number, String name, int age) {
+        this.id = number;
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+package src.iceseto.test7;
+
+public class StudentTest {
+    public static void main(String[] args) {
+        /*定义一个长度为3的数组，数组存储1~3名学生对象作为初始数据，学生对象的学号，姓名各不相同。
+        学生的属性:学号，姓名，年龄。
+        要求1: 再次添加一个学生对象，并在添加的时候进行学号的唯一性判断。
+        要求2: 添加完毕之后，遍历所有学生信息。
+            要求3:“通过id删除学生信息
+        如果存在，则删除，如果不存在，则提示删除失败。
+        要求4: 删除完毕之后，遍历所有学生信息。
+        要求5: 查询数组id为“heimaee2”的学生，如果存在，则将他的年龄+1岁*/
+        //1.创建一个数组用来存储学生对象
+        Student[] students = new Student[3];
+        //创建学生对象并添加到数组中
+        Student st1 = new Student(210415, "ljx", 20);
+        Student st2 = new Student(210416, "css", 21);
+        Student st3 = new Student(210414, "cs", 21);
+
+        students[0] = st1;
+        students[1] = st2;
+        students[2] = st3;
+
+        //再次添加一个学生对象，并在添加的时候进行学号的唯一性判断
+        Student st4 = new Student(210418, "cx", 22);
+        //唯一性判断
+        //已存在 不用添加
+        //不存在 添加
+        int count = getCount(students);
+        if (contains(students, st4.getId())) {
+            System.out.println("学号已存在，请检查");
+        } else {
+            //把;stu4添加到数组当中
+            //1.数组已经存满 --- 只能创建一个新的数组，新数组的长度 = 老数组 + 1
+            //2.数组没有存满 --- 直接添加
+
+            if (count == students.length) {
+                //已存满
+                Student[] newArr = createNewARR(students);
+                newArr[count] = st4;
+                printArr(newArr);
+            } else {
+                //没有存满
+                //[stu1,stu2,nul1]
+                //getCount获取到的是2，表示数组当中已经有了2个元素//还有一层意思: 如果下一次要添加数据，就是添加到2索引的位置
+                students[count] = st4;
+                System.out.println("添加成功");
+                printArr(students);
+            }
+        }
+
+    }
+
+
+    //定义方法遍历数组
+    public static void printArr(Student[] students) {
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+
+                System.out.println(students[i].getId() + ", " + students[i].getName() + ", " + students[i].getAge());
+            }
+        }
+    }
+
+    public static Student[] createNewARR(Student[] students) {
+        Student[] newARR = new Student[students.length + 1];
+        for (int i = 0; i < students.length; i++) {
+            newARR[i] = students[i];
+        }
+        return newARR;
+    }
+
+    //定义一个方法判断数组中存了几个元素
+    public static int getCount(Student[] students) {
+        int count = 0;
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean contains(Student[] students, int id) {
+        for (int i = 0; i < students.length; i++) {
+            Student student = students[i];
+            if (student != null) {
+                if (id == student.getId()) {
+                    return true;
+
+                }
+            }
+        }    return false;
+    }
+}
+package src.iceseto.test7;
+
+public class StudentTest2 {
+    public static void main(String[] args) {
+        Student[] students = new Student[3];
+        //创建学生对象并添加到数组中
+        Student st1 = new Student(210415, "ljx", 20);
+        Student st2 = new Student(210416, "css", 21);
+        Student st3 = new Student(210414, "cs", 21);
+
+        students[0] = st1;
+        students[1] = st2;
+        students[2] = st3;
+        /*要求3:“通过id删除学生信息
+        如果存在，则删除，如果不存在，则提示删除失败。
+        要求4: 删除完毕之后，遍历所有学生信息。
+        要求5: 查询数组id为“heimaee2”的学生，如果存在，则将他的年龄+1岁*/
+        //获取id所在索引
+        int index = getIndex(students,210415);
+        if (index != -1){
+            //存在删除
+            students[index] = null;
+        }else{
+             //提示删除失败
+            System.out.println("当前id不存在 删除失败");
+        }
+        printArr(students);
+    }
+
+    //定义方法遍历数组
+    public static void printArr(Student[] students) {
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+
+                System.out.println(students[i].getId() + ", " + students[i].getName() + ", " + students[i].getAge());
+            }
+        }
+    }
+    public static int getIndex(Student[] students, int id) {
+        int index = 0;
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+                if (id == students[i].getId()) {
+                    return index;
+                } else {
+                    index++;
+                }
+            }
+        }return -1;
+    }
+}
+package src.iceseto.test7;
+
+public class StudentTest3 {
+    public static void main(String[] args) {
+        ///要求5: 查询数组id为“210415”的学生，如果存在，则将他的年龄+1岁
+        Student[] students = new Student[3];
+        //创建学生对象并添加到数组中
+        Student st1 = new Student(210415, "ljx", 20);
+        Student st2 = new Student(210416, "css", 21);
+        Student st3 = new Student(210414, "cs", 21);
+
+        students[0] = st1;
+        students[1] = st2;
+        students[2] = st3;
+        int index = getIndex(students,210415);
+        if (index != -1){
+            students[index].setAge(students[index].getAge()+1);
+        }else{
+            System.out.println("当前id不存在");
+        }
+        printArr(students);
+    }
+    public static int getIndex(Student[] students, int id) {
+        int index = 0;
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+                if (id == students[i].getId()) {
+                    return index;
+                } else {
+                    index++;
+                }
+            }
+        }return -1;
+    }
+    //定义方法遍历数组
+    public static void printArr(Student[] students) {
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] != null) {
+
+                System.out.println(students[i].getId() + ", " + students[i].getName() + ", " + students[i].getAge());
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
