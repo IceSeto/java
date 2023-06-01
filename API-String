@@ -16,3 +16,14 @@ public String(String orginal)
 public String(char[] chs)
 
 public String(byte[] chs)
+  ==号比较的是什么？
+  基本数据类型 比较的就是数值  引用数据类型比较的是地址值
+        int a = 10;
+        int b = 10;
+        System.out.println(a==b);//true
+        String s1 = new String("abc");
+        String s2 = new String("abc");
+        System.out.println(s1==s2);//false
+字符串比较
+boolean equals()            完全一样结果才是true，否则为false
+boolean equalsIgonreCase()  忽略大小写的比较 
