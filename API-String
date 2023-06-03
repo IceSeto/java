@@ -306,7 +306,7 @@ public class StringDemo9 {
     }
 }
 package src.api.stringdemo;
-
+  
 public class StringDemo10 {
     public static void main(String[] args) {
         //String substring(int beginindex, int endindex)
@@ -324,3 +324,64 @@ public class StringDemo10 {
         System.out.println(result);
     }
 }
+package src.api.stringdemo;
+
+public class StringDemo11 {
+    public static void main(String[] args) {
+        //定义一个字符串来定义身份证号码
+        String id = "410522233911293349";
+
+        //获取出生年月日
+        String year = id.substring(6, 10);
+        String month = id.substring(10, 12);
+        String day = id.substring(12, 14);
+        char gender = id.charAt(17);
+        //String gender = id.substring(17, 18);
+        String born = year + "年" + month + "月" + day + "日";
+        System.out.println("人物信息为：");
+        System.out.println("出生日期为："+born);
+        //用ascii码表 把字符变成数字 ‘0’ ----》 48
+        if (gender % 2 == 0){
+            System.out.println("性别为女");
+        }else{
+            System.out.println("性别为男");
+        }
+
+    }
+}
+package src.api.stringdemo;
+
+public class StringDemo12 {
+    public static void main(String[] args) {
+        //String replace(旧值,新值)
+        //替换注意点:只有返回值才是替换之后的结果
+        //获取到说的话
+        String talk = "你玩的真好，TMD";
+
+        //把敏感词 TMD 换成***
+
+        String result = talk.replace("TMD", "***");
+        //打印
+        System.out.println(result);
+    }
+}
+    package src.api.stringdemo;
+
+    public class StringDemo13 {
+        public static void main(String[] args) {
+            //String replace(旧值,新值)
+            //替换注意点:只有返回值才是替换之后的结果
+            //获取到说的话
+            String talk = "你玩的真好，TMDCNMSB";
+            //定义一个敏感词库
+            String[] arr = {"TMD","CNM","SB","NMSL"};
+            //循环得到每一个敏感词 依次替换
+            for (int i = 0; i < arr.length; i++) {
+                talk = talk.replace(arr[i], "***");
+
+            }
+            //把敏感词 TMD 换成***
+            //打印
+            System.out.println(talk);
+        }
+    }
