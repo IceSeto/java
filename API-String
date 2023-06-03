@@ -27,3 +27,300 @@ public String(byte[] chs)
 字符串比较
 boolean equals()            完全一样结果才是true，否则为false
 boolean equalsIgonreCase()  忽略大小写的比较 
+
+package src.api.stringdemo;
+
+public class StringDemo1 {
+    public static void main(String[] args) {
+        //直接赋值
+        String s1 = "abc";
+        System.out.println(s1);
+        //构造方法 new
+        //空参构造 创建一个空字符串
+        String s2 = new String();
+        System.out.println("@" + s2 + "!"); //""
+        //有参构造
+        //传递一个字符串 根据字符串的内容 再创建一个字符串
+        String s3 = new String("ABC");
+        System.out.println(s3);
+        //传递一个字符数组，根据字符数组的内容来创建新的字符串对象
+        char[] chs = {'d', 'e', 'f'};
+        String s4 = new String(chs);
+        System.out.println(s4);
+        //需求：我要修改字符串的内容 abc————Qbc
+        //abc ————》 {‘a’,‘b’,‘c’}——————》{‘Q’,‘b’,‘c’}————————》"Qbc"
+
+
+        //传递一个字节数组
+        //根据字节数组的内容创建一个字符串对象
+        //byte
+        //应用场景以后网络中传递的信息都是字节信息
+        //我们一般要把字节信息进行转换，转换成字符串，此时要用到这个构造
+        byte[] bytes = {97, 98, 99, 100};
+        String s5 = new String(bytes);
+        System.out.println(s5);//abcd
+    }
+}
+package src.api.stringdemo;
+
+public class StringDemo2 {
+    public static void main(String[] args) {
+        //创建两个字符串对象
+        String s1 = new String("abc");
+        String s2 = "abc";
+        //==号比较
+        System.out.println(s1==s2);//false
+
+        //比较字符串对象中的内容
+        String s3 = "ABC";
+        boolean r1 = s1.equals(s2);
+        boolean r2 = s1.equalsIgnoreCase(s3);
+        System.out.println(r1);//true
+
+        System.out.println(r2);//true
+    }
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo3 {
+    public static void main(String[] args) {
+        //键盘录入一个字符串"abc" 与直接赋值一个abc ==号比较
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.next();//abc  new 出来的
+        String s2 = "abc";
+        System.out.println(s1 == s2);//false
+
+        //结论：
+        //想要比较字符串里的内容就必须要使用String里的方法
+        //equals(); 或者 equalsIgonreCase();
+    }
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo4 {
+    public static void main(String[] args) {
+        //读题拆解
+        /*已知正确的用户名和密码，
+        请用程序实现模拟用户登录总共给三次机会，
+        登录之后，给出相应的提示
+         */
+        //定义两个变量记录正确的用户名和密码
+        String rightUserName = "iceseto";
+        String righrPassword = "123456";
+
+        //模拟用户登录
+        Scanner sc = new Scanner(System.in);
+
+        for (int i = 1; i < 4; i++) {
+            System.out.println("请输入用户名");
+            String UserName = sc.next();
+            System.out.println("请输入密码");
+            String Password = sc.next();
+            boolean falg1 = rightUserName.equals(UserName);
+            boolean falg2 = righrPassword.equals(Password);
+            if (falg1&&falg2){
+                System.out.println("登录成功！");
+                System.exit(0);
+            }else if (!falg1){
+                System.out.println("请检查用户名！请重新输入用户名和密码");
+            }else if (!falg2){
+                System.out.println("密码错误！请重新输入用户名和密码");
+            }
+        }
+        System.out.println("三次");
+
+    }
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo5 {
+    public static void main(String[] args) {
+        //键盘录入一个字符串 并遍历和输出长度
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入一个字符串");
+        String str = sc.next();
+        //遍历
+        for (int i = 0; i < str.length(); i++) {
+            //i 表示字符串的每一个索引
+            char c = str.charAt(i);
+            System.out.println(c);
+        }
+    }
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo6 {
+    public static void main(String[] args) {
+        //需求键盘录入一个字符串 并统计大写小写数字的个数
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int smallCounter = 0;
+        int bigCounter = 0;
+        int numberCounter = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z') {
+                smallCounter++;
+            } else if (str.charAt(i) >= 'A' && str.charAt(i) <= 'z') {
+                bigCounter++;
+            } else if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+                numberCounter++;
+            }
+        }
+        System.out.println("小写字母：" + smallCounter + ". 大写字母：" + bigCounter + ". 数字：" + numberCounter);
+    }
+}
+package src.api.stringdemo;
+
+public class StringDemo7 {
+    public static void main(String[] args) {
+        //定义一个方法，把int数组中的数据按照指定的格式拼接成一个字符串返回调用该方法，并在控制台输出结果。例如:
+        //数组为inl]arr =(1,2,3);
+        //执行方法后的输出结果为:[1,2,3]
+        int[] arr = {1, 2, 5, 7, 9};
+        String str = arrToString(arr);
+        System.out.println(str);
+    }
+
+
+    //定义方法
+    ////1.我要干嘛?--- 遍历数组并把数组拼接成一个字符串
+    // 2.我干这件事情需要什么才能完成? --- 数组
+    // 3.我干完了是否要把结果返回给调用处 --- 返回一个拼接之后的字符串
+    // 如果调用处需要继续使用，那么必须返回
+    ////如果调用处不需要继续使用，那么可以返回也可以不返回
+    public static String arrToString(int[] arr) {
+        String str = "";
+        if (arr == null) {
+            return "";
+        }
+        if (arr.length == 0) {
+            return "[]";
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (i == 0) {
+                str = "[" + arr[i] + ",";
+            } else if (i == arr.length - 1) {
+                str = str + arr[i] + "]";
+            } else {
+                str = str + arr[i] + ",";
+            }
+        }
+        return str;
+    }
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo8 {
+    public static void main(String[] args) {
+        //字符串反转
+        //定义一个方法，实现字符串反转。
+        //键盘录入一个字符串，调用该方法后，
+        //在控制台输出结果例如，键盘录入 abc，输出结果 cba
+        Scanner sc = new Scanner(System.in);
+        String result = sc.next();
+        result = reverser(result);
+        System.out.println(result);
+
+    }
+    public static String reverser(String str){
+        String result = new String();
+        for (int i = 0; i < str.length(); i++) {
+            result = result + str.charAt(str.length() - 1 -i);
+        }
+        return result;
+    }
+
+}
+package src.api.stringdemo;
+
+import java.util.Scanner;
+
+public class StringDemo9 {
+    public static void main(String[] args) {
+        //键盘录入金额
+        String moneyStr = "";
+        Scanner sc = new Scanner(System.in);
+        int money;
+        while (true) {
+            System.out.println("请输入金额。");
+            money = sc.nextInt();
+            if (money >= 0 && money <= 9999999) {
+                break;
+            } else {
+                System.out.println("金额超出范围。");
+            }
+        }
+        System.out.println(money);
+        //遍历每一个数字 并转换成大写
+        int num = money;
+        int count = 0;
+        while (num != 0) {
+            num = num / 10;
+            count++;
+        }
+        for (int i = 0; i < count; i++) {
+            int i1 = money % 10;
+            moneyStr = getCapitalNumber(i1) + moneyStr;
+            money = money / 10;
+        }
+
+
+        //在前面补零 补齐七位
+        while (true) {
+            if (moneyStr.length() < 7) {
+                moneyStr = "零" + moneyStr;
+            } else {
+                break;
+            }
+        }
+        System.out.println(moneyStr);
+
+        //插入单位
+        //定义数组表示单位
+        String[] arr = {"百", "拾", "万", "千", "百", "十", "元",};
+        //              零    零    零    肆    伍    陆   叁
+        String result = "";
+        for (int i = 0; i < arr.length; i++) {
+            result =  arr[arr.length - 1 - i] + result;
+            result =  moneyStr.charAt(arr.length - 1 - i) + result ;
+        }
+        System.out.println(result);
+
+
+    }
+
+    //定义方法把数字变成大写
+    public static String getCapitalNumber(int money) {
+        String[] str = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+        return str[money];
+    }
+}
+package src.api.stringdemo;
+
+public class StringDemo10 {
+    public static void main(String[] args) {
+        //String substring(int beginindex, int endindex)
+        //截取
+        //注意点:包头不包尾，包左不包右
+        //获取一个手机号码
+        String phoneNumber = "18303830322";
+        //截取前三位
+        String start = phoneNumber.substring(0, 3);
+        System.out.println(start);
+        //截取后四位
+        String end = phoneNumber.substring(7);
+        System.out.println(end);
+        String result = start + "****" + end;
+        System.out.println(result);
+    }
+}
