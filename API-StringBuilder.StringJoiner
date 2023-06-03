@@ -1,0 +1,228 @@
+StringBuilder概述
+stringBuilder 可以看成是一个容器，创建之后里面的内容    是可变的
+作用:提高字符串的操作效率
+StringBuilder构造方法
+方法名
+
+public StringBuilder()
+public StringBuilder(String str)
+说明
+
+创建一个空白可变字符串对象，不含有任何内容
+根据字符串的内容，来创建可变字符串对象
+
+StringBuilder常用方法
+方法名
+public StringBuilder append(任意类型)public StringBuilder reverse() 
+public int length()
+public String toString0
+说明
+添加数据，并返回对象本身
+反转容器中的内容
+返回长度(字符出现的个数)
+通过toString0就可以实现把StringBuilder转换为String
+package src.api.stringbuilderdemo;
+
+public class StringBuilderDemo1 {
+    public static void main(String[] args) {
+        String s = "";
+        for (int i = 0; i < 1000000; i++) {
+            s = s + "abc";
+        }
+            System.out.println(s);
+
+    }
+}
+package src.api.stringbuilderdemo;
+
+public class StringBuilderDemo2 {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 1000000; i++) {
+            sb.append("abc");
+        }
+            System.out.print(sb);
+
+    }
+}
+package src.api.stringbuilderdemo;
+
+public class StringBuilderDemo3 {
+    public static void main(String[] args) {
+        //创建对象
+        StringBuilder sb = new StringBuilder("zz");
+
+        //添加元素
+        sb.append(1);
+        sb.append(2.3);
+        sb.append(true);
+        sb.append("a");
+
+        //反转
+        sb.reverse();
+
+
+        //获取长度
+
+        int len = sb.length();
+        System.out.println(len);
+        //打印
+        ////普及:
+        ////因为stringBuilder是Java已经写好的类
+        // java在底层对他做了一些特殊处理。
+        // 打印对象不是地址值而是属性值。
+        System.out.println(sb);
+
+
+
+    }
+}
+package src.api.stringbuilderdemo;
+
+public class StringBuilderDemo4 {
+    public static void main(String[] args) {
+        //创建对象
+        StringBuilder sb = new StringBuilder();
+
+        //添加字符串
+        sb.append("aaa").append("bbb").append(1);
+
+
+        System.out.println(sb);//aaabbb1
+
+        //把sb变回字符串
+
+        String str = sb.toString();
+        System.out.println(str);
+    }
+}
+  package src.api.stringbuilderdemo;
+
+import java.util.Scanner;
+
+public class StringBuilderDemo5 {
+    public static void main(String[] args) {
+            //链式编程:
+            //当我们在调用一个方法的时候，不需要用变量接收他的结果，可以继续调用其他方法
+        //依赖前一个方法的结果再来使用
+        int len = getString().substring(1).replace("A" ,"o").length();
+        System.out.println(len);
+    }
+
+    public static String getString() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入一个字符串");
+        String str = sc.next();
+        return str;
+    }
+}package src.api.stringbuilderdemo;
+
+import java.util.Scanner;
+
+public class StringBuilderDemo6 {
+    public static void main(String[] args) {
+
+        //使用StringBuilder的场景
+        //1 字符串的拼接
+        //2 字符串的反转
+        StringBuilder sb = new StringBuilder();
+        Scanner sc  = new Scanner(System.in);
+        String str1 = sc.next();
+        String str2 = sb.append(str1).reverse().toString();
+        boolean flag = str1.equals(str2);
+        if (flag){
+            System.out.println(str1+"是对称字符串");
+        }else {
+            System.out.println("不是");
+        }
+    }
+}
+package src.api.stringbuilderdemo;
+
+public class StringBuilderDemo7 {
+    public static void main(String[] args) {
+        //定义数组
+        int[] arr = {1,2,3};
+        //调用方法把数组变成字符串
+        String result = arrToString(arr);
+        System.out.println(result);
+    }
+    public static String arrToString(int[] arr){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1){
+                sb.append(arr[i]);
+            }else{
+                sb.append(arr[i]).append(", ");
+            }
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
+}
+
+StringJoiner概述
+Stringjoiner跟StringBuilder一样，也可以看成是一个容器，创建之后里面的内容是可变的作用:提高字符串的操作效率，而且代码编写特别简洁，但是目前市场上很少有人用。
+JDK8出现的
+StringJoiner 的构造方法
+方法名
+public StringJoiner(间隔符号)
+public StringJoiner (间隔符号，开始符号，结束符号)
+说明
+创建一个StringJoiner对象，指定拼接时的间隔符号
+创建一个StringJoiner对象，指定拼接时的间隔符号开始符号、结束符号
+StringJoiner的成员方法
+方法名
+public StringJoiner add (添加的内容)
+public int length0)
+public String toString0
+说明
+添加数据，并返回对象本身
+返回长度(字符出现的个数
+返回一个字符串(该字符串就是拼接之后的结果)
+package src.api.stringjoiner;
+
+import java.util.StringJoiner;
+
+public class StringJoinerDemo1 {
+    public static void main(String[] args) {
+        //创建对象 并指定间隔符号
+        StringJoiner sj = new StringJoiner("===");
+
+        //添加元素
+        sj.add("aaa").add("bbb").add("ccc");
+
+        //打印
+        System.out.println(sj);
+    }
+}
+package src.api.stringjoiner;
+
+import java.util.StringJoiner;
+
+public class StringJoinerDemo2 {
+    public static void main(String[] args) {
+        StringJoiner sj = new StringJoiner(", ","[","]");
+
+        //添加元素
+
+        sj.add("xx").add("yy").add("zz");
+        System.out.println(sj);
+        int len = sj.length();
+        System.out.println(len);
+
+
+        String str = sj.toString();
+        System.out.println(str);
+    }
+}
+
+
+1.String
+表示字符串的类，定义了很多操作字符串的方法2.StringBuilder
+一个可变的操作字符串的容器
+可以高效的拼接字符串，还可以将容器里面的内容反转
+3.StringJoiner
+JDK8出现的一个可变的操作字符串的容器，可以高效，方便的拼接字符串
