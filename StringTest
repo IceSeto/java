@@ -239,3 +239,85 @@ public class Test3 {
         return sb.toString();
     }
 }
+package src.api.stringtest;
+
+import java.util.Random;
+
+public class Test4 {
+    public static void main(String[] args) {
+        //生成验证码
+        //内容:可以是小写字母，也可以是大写字母，还可以是数字规则:
+        //长度为5
+        //内容中是四位字母，1位数字。
+        //其中数字只有1位，但是可以出现在任意的位置。
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        char [] letter = new char[52];
+        for (int i = 0; i < 52; i++) {
+            letter[i] = (char)r.nextInt(65,91);
+            letter[51-i] = (char)r.nextInt(97,123);
+        }
+        for (int i = 0; i < 4; i++) {
+            sb.append(letter[r.nextInt(52)]);
+        }
+        sb.append(r.nextInt(10));
+        System.out.println(sb);
+        char[] arr = sb.toString().toCharArray();
+        int index = r.nextInt(4);
+        char temp = arr[arr.length - 1 ];
+        arr[arr.length - 1] = arr[index];
+        arr[index] = temp;
+        String result = new String(arr);
+        System.out.println(result);
+    }
+}
+package src.api.stringtest;
+
+public class Test5 {
+    public static void main(String[] args) {
+        //注意:需要用已有的知识完成。*/
+        ///*给定两个以字符串形式表示的非负整数num1和num2，返回num1和num2的乘积，它们的乘积也表示为字符串形式
+        String str1 = "12";
+        String str2 = "11";
+        int result = getnunmber(str1) * getnunmber(str2);
+        System.out.println("\""+result+"\"");
+    }
+
+    public static int getnunmber(String str) {
+        char[] arr = str.toCharArray();
+        int plus = 1;
+        int number = 0;
+        int i1 = arr[0];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            number = number + (int) (arr[i] - 48) * plus;
+            plus = plus * 10;
+        }
+        return number;
+    }
+}
+package src.api.stringtest;
+
+public class Test6 {
+    public static void main(String[] args) {
+        ///*给你一个字符串 s，由若干单词组成，单词前后用一些空格字符隔开。
+        //返回字符出中最后一个单词的长度。
+        //单词是指仅由字母组成、不包含任何空格字符的最大子字符串。
+        String str1 = "fly to the moon";
+        String str2 = "hello world";
+        System.out.println(getNumber(str2));
+        System.out.println(getNumber(str1));
+
+    }
+    public static int getNumber(String str){
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ' '){
+                count = 0;
+            }else{
+                count++;
+            }
+        }
+        return count;
+    }
+}
