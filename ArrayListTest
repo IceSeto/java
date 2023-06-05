@@ -1,0 +1,60 @@
+package src.api.arraylist.arraylisttest;
+
+import java.util.ArrayList;
+
+public class Test1 {
+    public static void main(String[] args) {
+        //需求:定义一个集合，添加字符串，并进行遍历
+        //遍历格式参照:[元素1,元素2,元素3]。
+        ArrayList<String> list = new ArrayList<>();
+        list.add("zzz");
+        list.add("xxx");
+        list.add("yyy");
+        System.out.print("[");
+        for (int i = 0; i < list.size(); i++) {
+            if (i != list.size() - 1 ){
+                System.out.print(list.get(i)+", ");
+            }else{
+                System.out.print(list.get(i)+"]");
+            }
+        }
+    }
+}
+package src.api.arraylist.arraylisttest;
+
+import java.util.ArrayList;
+
+public class Test2 {
+    public static void main(String[] args) {
+        //需求:定义一个集合，添加数字，并进行遍历遍历格式参照:[元素1,元素2,元素3]
+        ArrayList<Integer> list = new ArrayList<>();
+
+        //int 类型可以与Integer类型互相转化
+        list.add(1);
+        list.add(2);
+        list.add(4);
+        list.add(6);
+        System.out.print("[");
+        for (int i = 0; i < list.size(); i++) {
+            if (i != list.size() - 1){
+                System.out.print(list.get(i) + ", ");
+            }else{
+                System.out.print(list.get(i) + "]");
+            }
+        }
+    }
+}
+package src.api.arraylist.arraylisttest;
+
+import java.util.ArrayList;
+
+public class Test3 {
+    public static void main(String[] args) {
+        ArrayList<Character> list = new ArrayList<>();
+        list.add('a');
+        list.add('a');
+        list.add('a');
+        list.add('a');
+        System.out.println(list);
+    }
+}
