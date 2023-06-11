@@ -73,7 +73,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String id = sc.next();
         if (!checkId(list,id)){
-            System.out.println("改学生不存在请检查");
+            System.out.println("该学生不存在请检查");
             System.out.println("----------删除结束----------");
             return;
         }else{
@@ -87,6 +87,32 @@ public class Main {
     }
 
     public static void alterStudent(ArrayList<Student> list) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("----------执行修改----------");
+        System.out.println("请输入想要修改的学生的id");
+        int flag = getIndex(list,sc.next());
+        if (flag < 0){
+            System.out.println("id不存在请重新输入");
+        }else{
+            String id = null;
+            while (true) {
+                System.out.println("请输入学生的id");
+                id = sc.next();
+                if (checkId(list, id)) {
+                    System.out.println("ID重复请重新输入");
+                } else {
+                    list.get(flag).setId(id);
+                    break;
+                }
+            }
+            System.out.println("请输入学生的姓名");
+            list.get(flag).setName(sc.next());
+            System.out.println("请输入学生的年龄");
+            list.get(flag).setAge(sc.nextInt());
+            System.out.println("请输入学生的地址");
+            list.get(flag).setAdress(sc.next());
+            System.out.println("----------执行修改----------");
+        }
 
     }
 
@@ -106,14 +132,29 @@ public class Main {
     }
 
     public static boolean checkId(ArrayList<Student> list, String id) {
-        for (int i = 0; i < list.size(); i++) {
+        /*for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getId().equals(id)) {
                 return true;
             }
         }
-        return false;
+        return false;*/
+        return getIndex(list,id) >= 0;
+    }
+
+    public static int getIndex(ArrayList<Student> list, String id){
+        for (int i = 0; i < list.size(); i++) {
+            Student stu = new Student();
+            stu = list.get(i);
+            String sid = stu.getId();
+
+            if(sid.equals(id)){
+                return i;
+            }
+        }
+        return -1;
     }
 }
+
 public class Student {
 
     private String id;
