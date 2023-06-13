@@ -20,8 +20,15 @@ Javabean类中很少会用
 
 javabean类用来描述一类事物的类
 测试类用来检查其他类是否书写正确带有main方法的类，是程序的入口
-
-
+//static的注意事项
+//静态方法只能访问静态变量和静态方法
+//非静态方法可以访问静态变量或者静态方法，也可以访问非静态的成员变量和非静态的成员方法
+//静态方法中是没有this关键字0
+//总结: 静态方法中，只能访问静态
+//非静态方法可以访问所有，
+//静态方法中没有this关键字
+总结:
+静态方法中没有this关键字静态方法中，只能访问静态。非静态方法可以访问所有。
 
 
 package mystatic.staticdemo1;
@@ -132,4 +139,197 @@ public class StudentTest {
         s2.show();
     }
 }
-  
+  package mystatic.staticdemo2;
+
+import java.util.StringJoiner;
+
+public class ArrayUtil {
+    //私有化构造方法
+    private ArrayUtil() {
+    }
+
+
+    //定义为静态的方便调用
+    public static String printArr(int[] arr) {
+        StringJoiner sj = new StringJoiner(",", "[", "]");
+        for (int i = 0; i < arr.length; i++) {
+            sj.add(" "+arr[i]);
+        }
+        return sj.toString();
+    }
+
+    public static double getAerage(double[] arr) {
+        double total = 0;
+        for (int i = 0; i < arr.length; i++) {
+            total = total + arr[i];
+        }
+        total = total / arr.length;
+        return total;
+    }
+}
+package mystatic.staticdemo2;
+
+public class TestDemo {
+    public static void main(String[] args) {
+        //定义数组工具类
+        //需求:在实际开发中，经常会遇到一些数组使用的工具类请按照如下要求编写一个数组的工具类:ArrayUtil
+        //提供一个工具类方法printArr，用于返回整数数组的内容
+        //返回的字符串格式如:[10,20,50,34,1001(只考虑整数数组，且只考虑一维数组)
+        // 提供这样一个工具方法getAerage，用于返回平均分。 (只考虑浮点型数组，且只考虑一维数组)
+        // 定义一个测试类TestDemo，调用该工具类的工具方法，并返回结果。
+        int[] arr1 = {1, 2, 5, 9, 7, 1};
+        double[] arr2 = {1.5, 1.9, 4.47, 7.9, 5.1};
+
+        double aerage = ArrayUtil.getAerage(arr2);
+        String s = ArrayUtil.printArr(arr1);
+        System.out.println(aerage);
+        System.out.println(s);
+    }
+}
+package mystatic.staticdemo3;
+
+public class Student {
+    private String name;
+    private String gender;
+    private int age;
+
+    public Student() {
+    }
+
+    public Student(String name, String gender, int age) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    /**
+     * 获取
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 设置
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取
+     * @return gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * 设置
+     * @param gender
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    /**
+     * 获取
+     * @return age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * 设置
+     * @param age
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String toString() {
+        return "Student{name = " + name + ", gender = " + gender + ", age = " + age + "}";
+    }
+}
+package mystatic.staticdemo3;
+
+import java.util.ArrayList;
+
+public class StudentUtil {
+    private StudentUtil(){};
+
+    public static int getMaxAgeStudent(ArrayList<Student> list){
+        int maxAge = 0;
+        for (int i = 0; i < list.size(); i++) {
+            int tempAge = list.get(i).getAge();
+            if (tempAge>maxAge){
+                maxAge = tempAge;
+            }
+        }
+        return maxAge;
+    }
+}
+
+package mystatic.staticdemo3;
+
+import java.util.ArrayList;
+
+public class Test {
+    public static void main(String[] args) {
+        ArrayList<Student> list = new ArrayList<>();
+        Student s1 = new Student("a01", "0", 17);
+        Student s2 = new Student("a02", "1", 19);
+        Student s3 = new Student("a03", "0", 21);
+
+        list.add(s1);
+        list.add(s2);
+        list.add(s3);
+
+        int maxAgeStudent = StudentUtil.getMaxAgeStudent(list);
+        System.out.println(maxAgeStudent);
+    }
+}
+package mystatic.staticdemo4;
+
+public class Student {
+    String name;
+    int age;
+    static String teacherName;
+
+
+    //this:表示当前方法调用者的地址值。
+    //这个this: 是由虚拟机赋值的。
+    public void show1(Student this) {
+        System.out.println(name + age + teacherName);
+        this.method();
+    }
+
+    public static void method() {
+        //System.out.println(name);
+        //报错
+        System.out.println("静态方法");
+    }
+}package mystatic.staticdemo4;
+
+public class Test {
+    public static void main(String[] args) {
+
+
+        Student.teacherName = "阿玮老师";
+        Student s1 = new Student();
+        s1.name = "zhangsan";
+        s1.age = 23;
+        s1.show1();
+
+
+        System.out.println("=========");
+        Student s2 = new Student();
+        s2.name = "lisi";
+        s2.age = 24;
+        s2.show1();
+    }
+}
+
