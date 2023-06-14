@@ -1,0 +1,105 @@
+//java中提供一个关键字extends，用这个关键字，我们可以让一个类和另一个类建立起继承关系。
+//public class Student extends Person {}
+//student称为子类 (派生类) ，Person称为父类(基类或超类)
+//使用继承的好处
+//可以把多个子类中重复的代码抽取到父类中了，
+//提高代码的复用性子类可以在父类的基础上，增加其他的功能，使子类更强大
+//当类与类之间，存在相同(共性)的内容，并满足子类是父类中的一种，就可以考虑使用继承，来优化代码
+//小结
+//什么是继承、继承的好处?
+//继承是面向对象三大特征之一，可以让类跟类之间产生子父的关系可以把多个子类中重复的代码抽取到父类中，子类可以直接使用，减少代码几余，提高代码的复用性
+//继承的格式?2.
+//public class 子类 extends 父类 1
+//3继承后子类的特点?
+//子类可以得到父类的属性和行为，子类可以使用子类可以在父类的基础上新增其他功能，子类更强大。
+//继承需要学习的点
+//1.什么是继承? 继承的好处
+//2.继承的特点
+//3.子类到底能继承父类中的哪些内容?(内存图/内存分析工具)
+//4.继承中:成员变量的访问特点
+//5.承中:成员方法的访问特点
+//6.继承中:构造方法的特点
+//7.this、super使用总结
+Java只支持单继承，不支持多继承，但支持多层继承
+多层继承: 子类 A 继承父类 B ，父类B 可以 继承父类 C
+每一个类都直接或者间接的继承于object
+画图: 从下往上画下面:子类上面:父类需要把子类中的共性内容抽取到父类中
+核心:1，共性内容抽取2，子类是父类中的一种
+书写代码从上往下写
+
+package myextends.extendsdemo1;
+
+public class Animal {
+
+    ////注意事项:
+    ////子类只能访问父类中非私有的成员
+    public void eat() {
+        System.out.println("吃东西");
+    }
+
+    public void drink() {
+        System.out.println("喝水");
+    }
+}
+package myextends.extendsdemo1;
+
+public class Cat extends Animal {
+    public void catchMouth() {
+        System.out.println("猫在抓老鼠");
+    }
+}
+package myextends.extendsdemo1;
+
+public class Dog extends Animal {
+    public void lookHome() {
+        System.out.println("狗在看家");
+    }
+}
+package myextends.extendsdemo1;
+
+public class Husky extends Dog{
+    public void breakHome(){
+        System.out.println("哈士奇在拆家");
+    }
+}
+package myextends.extendsdemo1;
+
+public class LiHua extends Cat{
+}
+package myextends.extendsdemo1;
+
+public class Ragdoll extends Cat {
+}
+package myextends.extendsdemo1;
+
+public class Teddy extends Dog{
+    public void touch(){
+        System.out.println("泰迪在蹭一蹭");
+    }
+}
+package myextends.extendsdemo1;
+
+public class Test {
+    public static void main(String[] args) {
+        //创建对象 调用方法
+        ////权限修饰符:
+        ////private: 子类就无法访问了
+        // 私有: 只能在本类中访问
+        // 爸爸的私房钱(自己能用)
+        //继承的练习 (自己设计一个继承体系)
+        //现在有四种动物:布偶猫、中国狸花猫、哈士奇、泰迪。
+        //暂时不考虑属性，只要考虑行为。
+        //请按照继承的思想特点进行继承体系的设计
+        //四种动物分别有以下的行为
+        //布偶猫:吃饭、喝水、抓老鼠中国狸花猫:吃饭、喝水、抓老鼠哈士奇:吃饭、喝水、看家、拆家泰迪:吃饭、喝水、看家、蹭一蹭
+        Ragdoll rd = new Ragdoll();
+        rd.eat();
+        rd.drink();
+        rd.catchMouth();
+        System.out.println("=================");
+        Husky h = new Husky();
+        h.eat();
+        h.drink();
+        h.breakHome();
+    }
+}
