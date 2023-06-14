@@ -9,6 +9,188 @@ A类  方法A                                            B类  方法B          
 虚方法表                             继承                   虚方法表                      继承                        虚方法表
 在B的基础上再添加自己类中的虚方法                  在C的基础上再添加自己类中的虚方法                                  非private非static非final  
 
+package myextends.extendsdemo2;
+
+public class Test {
+    public static void main(String[] args) {
+        //空参构造创建子类对象
+        Zi z1 = new Zi();
+
+        //带参构造创建子类对象
+        //Zi z2 = new Zi("a01",18);
+        //子类不能继承父类的构造方法
+    }
+}
+
+class Fu {
+    String name;
+    int age;
+
+    public Fu() {
+        //如果一个类中没有构造方法，虚拟机会自动的给你添加一个默认的空参构造
+    }
+
+    public Fu(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Zi extends Fu {}
+
+package myextends.extendsdemo3;
+
+//import org.openjdk.jol.vm.VM;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) throws IOException {
+        Zi z = new Zi();
+        //把对象的地址值以十六进制的形式打在控制台上
+//        System.out.println(Long.toHexString(VM.current().addressof(z)));
+        //内存分析工具需要工具不停止
+        Scanner sc = new Scanner(System.in);
+        sc.next();
+    }
+}
+
+class Fu {
+    private int a = 0x011;
+
+    int b = 0x022;
+
+    public void fuShow1() {
+        System.out.println("publc---fuShow1");
+    }
+
+    private void fuShow2() {
+        System.out.println("private---fuShow2");
+    }
+}
+
+class Zi extends Fu {
+    int c = 0x033;
+
+    public void ziShow() {
+        System.out.println("public--ziShow");
+    }
+}
+
+package myextends.extendsdemo4;
+
+public class Test {
+    public static void main(String[] args) {
+        Zi z = new Zi();
+        z.zishow();
+    }
+
+}
+class Ye{
+    String name = "Ye";
+}
+class Fu {
+    String name = "Fu";
+}
+
+class Zi extends Fu {
+    String name = "zi";
+
+    public void zishow() {
+        String name = "zishow";
+        System.out.println(name);  //zishow
+        System.out.println(this.name);  //zi
+        System.out.println(super.name); //fu
+//        System.out.println(super.super.name); //Ye?
+        //没有这种写法
+    }
+}
+package myextends.extendsdemo5;
+
+public class Test {
+    public static void main(String[] args) {
+        Zi z = new Zi();
+        z.show();
+    }
+}
+
+class Fu {
+    String name = "Fu";
+    String hobby = "喝茶";
+}
+
+class Zi extends Fu {
+    String name = "zi";
+    String game = "吃鸡";
+
+    public void show() {
+        //如何打印zi
+        System.out.println(name);
+        System.out.println(this.name);
+        // 如何打印Fu
+        System.out.println(super.name);
+        //如何打印喝茶
+        System.out.println(super.hobby);
+        //如何打印吃鸡
+        System.out.println(this.game);
+    }
+}package myextends.extendsdemo6;
+
+public class Test {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.lunch();
+
+        OverseasStudent os = new OverseasStudent();
+        os.lunch();
+    }
+}
+
+class Person {
+    public void eat() {
+        System.out.println("吃米饭，吃菜");
+    }
+
+    public void drink() {
+        System.out.println("喝开水");
+    }
+}
+
+class OverseasStudent extends Person{
+    public void lunch() {
+        this.eat();
+        this.drink();
+
+        super.eat();
+        super.drink();
+    }
+    //当父类的方法不能满足子类现在的需求时，需要进行方法重写
+    //需要加上@Override
+    @Override
+    public void eat() {
+        System.out.println("吃意大利面");
+    }
+    @Override
+    public void drink() {
+        System.out.println("喝凉水");
+    }
+
+}
+
+
+class Student extends Person {
+    public void lunch() {
+        ////先在本类中查看eat和drink方法，就会调用子类的，如果没有，就会调用从父类中继承下来的eat和drink方法
+
+        eat();
+        drink();
+
+        //直接调用父类的eat和drink方法
+        super.eat();
+        super.drink();
+    }
+}
 
 4.继承中: 成员变量的访问特点
 5.继承中: 成员方法的访问特点
