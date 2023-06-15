@@ -1,0 +1,247 @@
+6.继承中:构造方法的特点
+1.继承中构造方法的访问特点是什么?
+子类不能继承父类的构造方法，但是可以通过super调用子类构造方法的第一行，有一个默认的super();默认先访问父类中无参的构造方法，再执行自己
+如果想要方法文父类有参构造，必须手动书写
+
+1.继承中构造方法的访问特点是什么?
+子类不能继承父类的构造方法，
+但是可以通过super调用子类构造方法的第一行，
+有一个默认的super();默认先访问父类中无参的构造方法，再执行自己
+如果想要方法文父类有参构造，必须手动书写
+
+this、super使用总结
+this:理解为一个变量，表示当前方法调用者的地址值;
+super:代表父类存储空间。
+关键字
+this
+super
+访问成员变量
+this.成员变量
+访问本类成员变量
+super.成员变量
+访问父类成员变量
+访问成员方法
+this.成员方法(...)
+访问本类成员方法
+super.成员方法(...)
+访问父类成员方法
+访问构造方法
+this(...)
+访问本类构方法
+super(...)
+访问父类构造方法
+package myextends.extendsdemo8;
+
+public class Person {
+    String name;
+    int age;
+    public Person(){
+        System.out.println("父类的无参构造");
+    }
+
+    public Person(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+}
+package myextends.extendsdemo8;
+
+public class Student extends Person{
+    public Student(){
+        //子类构造方法中隐藏的super()去访问父类的无参构造
+        super();
+        System.out.println("子类的无参构造");
+    }
+    public Student(String name, int age){
+        //子类构造方法中隐藏的super()去访问父类的无参构造
+        super(name,age);
+        System.out.println("子类的有参构造");
+    }
+}
+package myextends.extendsdemo8;
+
+public class Test {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = new Student("zhangsan", 21);
+
+
+        System.out.println(s2.name+ s2.age);
+    }
+}
+package myextends.extendsdemo9;
+
+public class Student {
+    String name;
+    int age;
+    String school;
+
+    //需求
+    //如果schllo没有赋值 默认为xx大学
+    public Student() {
+        //调用本类其他构造方法
+        //虚拟机不会添加super();
+        this(null,0,"xx大学");
+    }
+
+    public Student(String name, int age, String school) {
+        this.name = name;
+        this.age = age;
+        this.school = school;
+    }
+}
+package myextends.extendsdemo9;
+
+public class Test {
+    public static void main(String[] args) {
+        Student s = new Student();
+        System.out.println(s.name+s.age+s.school);
+    }
+}
+package myextends.extendsdemo10;
+
+public class Cook extends Employee {
+
+    public Cook() {
+    }
+
+    public Cook(String id, String name, double salary) {
+        super(id,name,salary);
+    }
+    @Override
+    public void job(){
+        System.out.println("炒菜");
+    }
+
+    public String toString() {
+        return "Cook{}";
+    }
+}
+package myextends.extendsdemo10;
+
+public class Employee {
+    private String id;
+    private String name;
+    private double salary;
+
+    public void job(){
+        System.out.println("员工正在工作");
+    }
+
+    public void eat(){
+        System.out.println("吃米饭");
+    }
+
+    public Employee() {
+    }
+
+    public Employee(String id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    /**
+     * 获取
+     * @return id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * 设置
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * 获取
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 设置
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取
+     * @return salary
+     */
+    public double getSalary() {
+        return salary;
+    }
+
+    /**
+     * 设置
+     * @param salary
+     */
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String toString() {
+        return "Employ{id = " + id + ", name = " + name + ", salary = " + salary + "}";
+    }
+}
+package myextends.extendsdemo10;
+
+public class Manager extends Employee {
+    private double bouns;
+
+    @Override
+    public void job(){
+        System.out.println("管理其他人");
+    }
+    public Manager() {
+    }
+
+    public Manager(String id, String name, double salary, double bouns) {
+        super(id, name, salary);
+        this.bouns = bouns;
+    }
+
+    /**
+     * 获取
+     * @return guanli
+     */
+    public double getBouns() {
+        return bouns;
+    }
+
+    /**
+     * 设置
+     * @param bouns
+     */
+    public void setBouns(double bouns) {
+        this.bouns = bouns;
+    }
+
+    public String toString() {
+        return "Manager{guanli = " + bouns + "}";
+    }
+}
+package myextends.extendsdemo10;
+
+public class Test {
+    public static void main(String[] args) {
+        Manager m1 = new Manager("a01","a",100,10);
+        Manager m2 = new Manager();
+        Cook c1 = new Cook("b01", "b", 100);
+        Cook c2 = new Cook();
+        System.out.println(m1);
+        m1.job();
+        c1.job();
+    }
+}
+
+  
