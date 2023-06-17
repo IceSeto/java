@@ -1,0 +1,175 @@
+package myinterface.interfacetest;
+
+public abstract class Person {
+    private System name;
+
+    private int age;
+
+
+    public Person() {
+    }
+
+    public Person(System name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    /**
+     * 获取
+     * @return name
+     */
+    public System getName() {
+        return name;
+    }
+
+    /**
+     * 设置
+     * @param name
+     */
+    public void setName(System name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取
+     * @return age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * 设置
+     * @param age
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String toString() {
+        return "Person{name = " + name + ", age = " + age + "}";
+    }
+}
+package myinterface.interfacetest;
+
+public abstract class Coach extends Person{
+    public abstract void teach();
+    public Coach() {
+    }
+
+    public Coach(System name, int age) {
+        super(name, age);
+    }
+}
+package myinterface.interfacetest;
+
+public abstract class Athlete extends Person{
+    public abstract void learn();
+    public Athlete() {
+    }
+
+    public Athlete(System name, int age) {
+        super(name, age);
+    }
+
+}
+package myinterface.interfacetest;
+
+public class BasketAthlete extends Athlete{
+    public BasketAthlete() {
+    }
+
+    public BasketAthlete(System name, int age) {
+        super(name, age);
+    }
+
+    @Override
+    public void learn() {
+        System.out.println("学打篮球");
+    }
+}
+package myinterface.interfacetest;
+
+public class BasketCoach extends Coach{
+    public BasketCoach() {
+    }
+
+    public BasketCoach(System name, int age) {
+        super(name, age);
+    }
+
+    @Override
+    public void teach() {
+        System.out.println("教打篮球");
+    }
+}
+package myinterface.interfacetest;
+
+public class PingPongCoach extends Coach implements SpeakEnglish{
+
+    public PingPongCoach() {
+    }
+
+    public PingPongCoach(System name, int age) {
+        super(name, age);
+    }
+
+    @Override
+    public void teach() {
+        System.out.println("教打乒乓球");
+    }
+
+    @Override
+    public void speakEnglish() {
+        System.out.println("乒乓球教练说英语");
+    }
+}
+package myinterface.interfacetest;
+
+public class PingPongAthlete extends Athlete implements SpeakEnglish{
+    public PingPongAthlete() {
+    }
+
+    public PingPongAthlete(System name, int age) {
+        super(name, age);
+    }
+
+    @Override
+    public void learn() {
+        System.out.println("学打乒乓球");
+    }
+
+    @Override
+    public void speakEnglish() {
+        System.out.println("乒乓球运动员说英语");
+    }
+}
+package myinterface.interfacetest;
+
+public interface SpeakEnglish {
+    public abstract void speakEnglish();
+}
+package myinterface.interfacetest;
+
+public class Test {
+    public static void main(String[] args) {
+        PingPongAthlete ppa = new PingPongAthlete();
+        PingPongCoach ppc = new PingPongCoach();
+        BasketCoach bc = new BasketCoach();
+        BasketAthlete ba = new BasketAthlete();
+
+
+        ppa.learn();
+        ppa.speakEnglish();
+        System.out.println("========");
+
+        ppc.teach();
+        ppc.speakEnglish();
+        System.out.println("========");
+
+        bc.teach();
+        System.out.println("========");
+
+        ba.learn();
+    }
+}
