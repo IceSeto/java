@@ -1,1 +1,130 @@
+JDK8以后接口中新增的方法
+允许在接口中定义默认方法需要使用关键字default 修饰作用: 解决接口升级的问题
+接口中默认方法的定义格式
+格式: public default 返回值类型 方法名(参数列表)}范例: public default void show()
+接口中默认方法的注意事项
+默认方法不是抽象方法，所以不强制被重写。但是如果被重写，重写的时候去掉default关键字
+public可以省略，default不能省略
+如果实现了多个接口，多个接口中存在相同名字的默认方法，子类就必须对该方法进行重写
+JDK8以后接口中新增的方法
+允许在接口中定义定义静态方法，需要用static修饰
+接口中静态方法的定义格式
+格式: public static 返回值类型 方法名(参数列表)[范例: public static void show(){ )
+接口中静态方法的注意事项
+静态方法只能通过接口名调用，不能通过实现类名或者对象名调用public可以省略，static不能省略
+JDK9新增的方法
+接口中私有方法的定义格式
+格式1:private 返回值类型 方法名(参数列表)[
+范例1: private void show()[
+格式2: private static 返回值类型 方法名(参数列表)范例2: private static void method(){
+1.JDK7以前: 接口中只能定义抽象方法
+2.JDK8:接口中可以定义有方法体的方法。(默认、静态
+3.JDK9: 接口中可以定义私有方法
+私有方法分为两种:普通的私有方法，静态的私有方法4.
+1.接口代表规则，是行为的抽象。想要让哪个类拥有一个行为，就让这个类实现对应的接口就可以了2.当一个方法的参数是接口时，可以传递接口所有实现类的对象，这种方式称之为接口多态
+package myinterface.interfacedemo5;
+
+public interface InterA {
+
+    public abstract void method();
+
+    public default void show(){
+        System.out.println("接口中A的默认方法 ----show");
+    }
+}
+package myinterface.interfacedemo5;
+
+public interface InterB {
+    public default void show(){
+        System.out.println("接口B中的默认方法 ----show");
+    }
+}
+package myinterface.interfacedemo5;
+
+public class InterImpl implements InterA,InterB {
+    @Override
+    public void method() {
+        System.out.println("实现类重写的抽象方法");
+    }
+
+    @Override
+    public void show() {
+        InterA.super.show();
+    }
+}
+package myinterface.interfacedemo5;
+
+public class Test {
+    public static void main(String[] args) {
+
+        InterImpl ii = new InterImpl();
+
+        ii.method();
+        ii.show();
+    }
+}
+package myinterface.interfacedemo6;
+
+public interface Inter {
+
+    public abstract void method();
+
+    public static void show(){
+        System.out.println("Inter接口中的静态方法——show");
+    }
+}
+package myinterface.interfacedemo6;
+
+public class InterImpl implements Inter{
+    @Override
+    public void method() {
+        System.out.println("实现类中重写的抽象方法");
+
+    }
+
+    public static void show(){
+        System.out.println("InterImpl的静态方法——show");
+    }
+}
+package myinterface.interfacedemo6;
+
+public class Test {
+    public static void main(String[] args) {
+        //接口中的show方法
+        Inter.show();
+
+
+        //INTERIMPL中的方法  此时不叫方法重写 只是恰好重名
+        InterImpl.show();
+
+        ////子类把从父类继承下来的虚方法表里面的方法进行覆盖了，这才叫重写。
+    }
+}
+package myinterface.interfacedemo7;
+
+public interface InterA {
+
+    public static  void show1() {
+        System.out.println("show1方法执行");
+        show4();
+    }
+
+    public static  void show2() {
+        System.out.println("show2方法执行");
+        show4();
+    }
+
+    //普通的私有方法,给默认方法服务
+    private void show3() {
+        System.out.println("记录日志，这里有100行代码");
+    }
+
+    private static void show4() {
+        System.out.println("记录日志，这里有100行代码");
+    }
+}
+package myinterface.interfacedemo7;
+
+public class Test {
+}
 
